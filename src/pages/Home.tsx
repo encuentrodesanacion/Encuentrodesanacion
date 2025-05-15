@@ -211,23 +211,7 @@ const App = () => {
                   </div>
                 ),
               },
-              {
-                icon: <Orbit className="w-8 h-8 mb-4 text-yellow-500" />,
-                title: "Alianzas",
-                description:
-                  "Adquiere tus descuentos con nuestras diferentes alianzas para avanzar aun mas en tu proceso de sanación",
-                price: "Desde 7.000CLP / €17 / 19USD",
-                button: (
-                  <div className="flex flex-col gap-2 mt-4">
-                    <Link
-                      to="/alianzas"
-                      className="mt-2 px-3 py-1 bg-cyan-600 text-white text-sm rounded hover:bg-cyan-700"
-                    >
-                      Ver más detalles
-                    </Link>
-                  </div>
-                ),
-              },
+
               {
                 icon: <SmilePlus className="w-8 h-8 mb-4 text-yellow-500" />,
                 title:
@@ -281,6 +265,23 @@ const App = () => {
                   >
                     Reserva tu cupo
                   </a>
+                ),
+              },
+              {
+                icon: <Orbit className="w-8 h-8 mb-4 text-yellow-500" />,
+                title: "Alianzas",
+                description:
+                  "Adquiere tus descuentos con nuestras diferentes alianzas para avanzar aun mas en tu proceso de sanación",
+                price: "Desde 7.000CLP / €17 / 19USD",
+                button: (
+                  <div className="flex flex-col gap-2 mt-4">
+                    <Link
+                      to="/alianzas"
+                      className="mt-2 px-3 py-1 bg-cyan-600 text-white text-sm rounded hover:bg-cyan-700"
+                    >
+                      Ver más detalles
+                    </Link>
+                  </div>
                 ),
               },
             ].map((service, index) => (
