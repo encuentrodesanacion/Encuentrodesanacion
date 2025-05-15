@@ -211,43 +211,6 @@ const App = () => {
                   </div>
                 ),
               },
-
-              {
-                icon: <SmilePlus className="w-8 h-8 mb-4 text-yellow-500" />,
-                title:
-                  "Programa Terapeutico para empresas/Colectivo de personas (Desde 8 personas)",
-                description:
-                  "Programa enfocado en lograr un bienestar Físico, Mental y/o Emocional. Utilizando diversas técnicas Holísticas para generar índices más altos de productividad y rendimiento.",
-                price:
-                  "Este servicio es especial y puede variar según tus necesidades.",
-                button: (
-                  <a
-                    href="mailto:evaldesnew@gmail.com?subject=Consulta&body=Hola,%20me%20gustaría%20saber%20más%20sobre..."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block mt-4 px-4 py-2 bg-cyan-400/60 text-black font-medium rounded-full hover:bg-pastel-green/80 transition"
-                  >
-                    Contáctanos
-                  </a>
-                ),
-              },
-              {
-                icon: <Earth className="w-8 h-8 mb-4 text-yellow-500" />,
-                title: "Spa Holístico al Mundo",
-                description:
-                  "Aprende a manejar tu propio Spa Holístico para poder expandir la Sanación en tu país. (excluye Chile)",
-                price: "Desde los €150 / $163USD",
-                button: (
-                  <a
-                    href="mailto:evaldesnew@gmail.com?subject=Consulta&body=Hola,%20me%20gustaría%20saber%20más%20sobre..."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block mt-4 px-4 py-2 bg-cyan-400/60 text-black font-medium rounded-full hover:bg-pastel-green/80 transition"
-                  >
-                    Contáctanos
-                  </a>
-                ),
-              },
               {
                 icon: <Brain className="w-8 h-8 mb-4 text-yellow-500" />,
                 title: "Talleres Mensuales",
@@ -267,6 +230,44 @@ const App = () => {
                   </a>
                 ),
               },
+
+              {
+                icon: <Earth className="w-8 h-8 mb-4 text-yellow-500" />,
+                title: "Spa Holístico al Mundo",
+                description:
+                  "Aprende a manejar tu propio Spa Holístico para poder expandir la Sanación en tu país. (excluye Chile)",
+                price: "Desde los €150 / $163USD",
+                button: (
+                  <a
+                    href="mailto:evaldesnew@gmail.com?subject=Consulta&body=Hola,%20me%20gustaría%20saber%20más%20sobre..."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block mt-4 px-4 py-2 bg-cyan-400/60 text-black font-medium rounded-full hover:bg-pastel-green/80 transition"
+                  >
+                    Contáctanos
+                  </a>
+                ),
+              },
+              {
+                icon: <SmilePlus className="w-8 h-8 mb-4 text-yellow-500" />,
+                title:
+                  "Programa Terapeutico para empresas/Colectivo de personas (Desde 8 personas)",
+                description:
+                  "Programa enfocado en lograr un bienestar Físico, Mental y/o Emocional. Utilizando diversas técnicas Holísticas para generar índices más altos de productividad y rendimiento.",
+                price:
+                  "Este servicio es especial y puede variar según tus necesidades.",
+                button: (
+                  <a
+                    href="mailto:evaldesnew@gmail.com?subject=Consulta&body=Hola,%20me%20gustaría%20saber%20más%20sobre..."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block mt-4 px-4 py-2 bg-cyan-400/60 text-black font-medium rounded-full hover:bg-pastel-green/80 transition"
+                  >
+                    Contáctanos
+                  </a>
+                ),
+              },
+
               {
                 icon: <Orbit className="w-8 h-8 mb-4 text-yellow-500" />,
                 title: "Alianzas",
@@ -370,12 +371,11 @@ const App = () => {
               </h2>
               <p className="text-gray-400 mb-8">
                 Da el primer paso hacia una vida más consciente y equilibrada.
-                Agenda tu consulta inicial gratuita.
               </p>
               <div className="space-y-4">
                 <p className="flex items-center text-gray-400">
                   <span className="font-light mr-2">Email:</span>
-                  contacto@holisticbalance.com
+                  spaholistico@encuentrodesanacion.com
                 </p>
                 <p className="flex items-center text-gray-400">
                   <span className="font-light mr-2">Teléfono:</span>

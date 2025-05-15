@@ -14,31 +14,31 @@ const imagenes = [
   },
   {
     src: "https://wallpapers.com/images/featured/imagenes-lindas-para-perfil-estetico-r521rmfa6ucixtw5.jpg",
-    alt: "Vieja kla",
-    descripcion: "AAAJJAJAJAJA",
+    alt: "Sesión de Pendulo Hebreo",
+    descripcion: "Texto de prueba",
     link: "#",
   },
   {
     src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAS92gYn8cWwD9JqRAUleYJiHgMO4bjEfFug&s",
     alt: "Cabina de luz azul",
-    descripcion: "AAAJJAJAJAJADADADAD",
+    descripcion: "Texto de Prueba",
     link: "#",
   },
   {
     src: "https://plus.unsplash.com/premium_photo-1695405363183-e55554168063?fm=jpg&q=60&w=3000",
-    alt: "Luz infrarroja",
+    alt: "Texto de prueba 2 ",
     link: "#",
   },
   {
     src: "https://www.shutterstock.com/image-illustration/david-street-style-graphic-designtextile-600nw-2265632523.jpg",
     alt: "Terapia combinada",
-    descripcion: "AAAJJAJAJAJAaaaaaaaaaaaaaaaaa",
+    descripcion: "Texto de prueba 3",
     link: "#",
   },
   {
     src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxFvoRX4Y_mAxPaWqaHP5XBrWmjd47UfiM0A&s",
     alt: "Fototerapia LED",
-    descripcion: "AAAJJAJAJAJAadswadsad",
+    descripcion: "Texto de prueba 4",
     link: "#",
   },
 ];
