@@ -7,14 +7,28 @@
 }
 
 /* Contenedor de cada tarjeta */
+/* Por defecto: 4 tarjetas por fila */
 .flip-wrapper {
   display: flex;
   flex-direction: column;
-  width: calc(25% - 1rem); /* Cuatro tarjetas por fila */
+  width: calc(25% - 1rem);
   margin-bottom: 1rem;
   vertical-align: top;
 }
 
+/* En pantallas de hasta 768px: 2 tarjetas por fila */
+@media (max-width: 768px) {
+  .flip-wrapper {
+    width: calc(50% - 1rem);
+  }
+}
+
+/* En pantallas de hasta 400px: 1 tarjeta por fila */
+@media (max-width: 400px) {
+  .flip-wrapper {
+    width: 100%;
+  }
+}
 /* Tarjeta (frente y reverso) */
 .flip-card {
   width: 100%;

@@ -1,11 +1,12 @@
 import Encuentrodesanacion from "../assets/Encuentrodesanacion.jpeg";
 import "../styles/flipCards.css"; // Asegúrate de tener los estilos aquí o adaptarlos a Tailwind
 import creadorvirtual from "../assets/creadorvirtual.jpg";
+import tuemprendimiento from "../assets/tuemprendimiento.jpeg";
 
 const alianzas = [
   {
     nombre: "@Creador_virtual",
-    url: "https://www.instagram.com/electrica_mente.cl/",
+    url: "h",
     imagen: creadorvirtual,
   },
   {
@@ -15,9 +16,9 @@ const alianzas = [
     descripcion: "Eventos de sanación y transformación. ¡Siente la energía!",
   },
   {
-    nombre: "Encuentro de sanación",
-    url: "https://www.instagram.com/encuentrodesanacion/",
-    imagen: Encuentrodesanacion,
+    nombre: "Tu Emprendimiento",
+    url: "h",
+    imagen: tuemprendimiento,
     descripcion: "Eventos de sanación y transformación. ¡Siente la energía!",
   },
   {
