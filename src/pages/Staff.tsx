@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import CarruselAlianzas from "./CarruselAlianzas";
+import CarruselStaff from "./CarruselStaff";
 
 const TerapeutasPage = () => {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ const TerapeutasPage = () => {
         <p className="mb-6">
           Contamos con los mejores terapeutas del rubro holístico
         </p>
-        <CarruselAlianzas />
+        <CarruselStaff />
       </section>
 
       <button

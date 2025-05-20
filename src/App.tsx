@@ -10,7 +10,7 @@ import Home from "./pages/Home";
 import ScrollToTop from "./components/ScrollToTop";
 import { CartProvider } from "./pages/CartContext";
 import ReservaForm from "./components/ReservaForm";
-import Carrito from "./components/Carrito";
+
 import CartIcon from "./components/CartIcon";
 import TratamientoHolistico from "./pages/TratamientoIntegral";
 import Alianzas from "./pages/Alianzas";

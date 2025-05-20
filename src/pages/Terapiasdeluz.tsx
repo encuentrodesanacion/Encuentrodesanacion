@@ -3,10 +3,11 @@ import "../styles/terapiaDeLuz.css";
 import "../components/ReservaHora";
 import ReservaForm from "../components/ReservaForm";
 import CartIcon from "../components/CartIcon"; // Icono del carrito
+import terapeuta3 from "../assets/Terapeuta3.jpg";
 
 const imagenes = [
   {
-    src: "https://media.istockphoto.com/id/636379014/es/foto/manos-la-formaci%C3%B3n-de-una-forma-de-coraz%C3%B3n-con-silueta-al-atardecer.jpg?s=612x612&w=0&k=20&c=R2BE-RgICBnTUjmxB8K9U0wTkNoCKZRi-Jjge8o_OgE=",
+    src: terapeuta3,
     alt: "Sesión de alta vibración que sirve para eliminar enfermedades y/o sanar",
     descripcion:
       "Es una terapia que ayuda a sanar desde las emocionalidades logrando así encontrarte asi con tu verdadero yo",
