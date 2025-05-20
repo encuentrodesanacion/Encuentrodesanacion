@@ -9,14 +9,14 @@ import Terapeuta7 from "../assets/Terapeuta7.jpg";
 const imagenes = [
   {
     src: terapeuta3,
-    alt: "Mención: Canalización",
+    alt: "Canalización",
     descripcion:
       "La Canalización es la capacidad de recibir información energética a través de la intuición y los sentidos sutiles. Se caracteriza por la conexión con guías espirituales, la percepción extrasensorial y la apertura a energías elevadas. En este curso exploraremos la glándula pineal, el aura, los elementales y la comunicación animal, integrando técnicas prácticas para fortalecer la recepción de mensajes energéticos. Los beneficios son desarrollar herramientas esenciales para lograr claridad intuitiva, expansión sensorial y fortalecimiento de la conexión energética",
     link: "#",
   },
   {
     src: Terapeuta7,
-    alt: "Mención: Limpieza con Cruz de Anhk",
+    alt: "Limpieza con Cruz de Anhk",
     descripcion:
       "El ankh, cruz ankh o llave de la vida, es un símbolo muy antiguo, muy asociada al antiguo Egipto, donde grandes Dioses y faraones. Sus bendiciones son múltiples, por ello, en esta formación viajáremos hacia el pasado, para conocer la historia y significado del Ankh y como poder poner sus virtudes al servicio de todos los involucrados. También aprenderás los tipos de contamines que podremos diagnosticar con ayuda del péndulo, en personas, espacio u objeto, y obviamente como limpiarnos con nuestra amada Cruz Ankh",
     link: "#",
