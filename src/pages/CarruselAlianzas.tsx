@@ -6,7 +6,7 @@ import tuemprendimiento from "../assets/tuemprendimiento.jpeg";
 const alianzas = [
   {
     nombre: "@Creador_virtual",
-    url: "h",
+    url: "https://www.instagram.com/creador_virtual/",
     imagen: creadorvirtual,
   },
   {

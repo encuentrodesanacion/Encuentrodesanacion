@@ -31,7 +31,7 @@ export default function TratamientoHolistico() {
     {
       img: Terapeuta3,
       title: "Tameana - Salush Nahí",
-      terapeuta: "Monica García",
+      terapeuta: "Mónica García",
       description:
         " es una terapia vibracional que trabaja con cristales de cuarzo y geometría sagrada para armonizar chakras, liberar bloqueos y elevar la frecuencia energética. Se recomiendan ciclos de 3 sesiones para una transformación profunda.",
     },

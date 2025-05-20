@@ -1,7 +1,5 @@
-import Encuentrodesanacion from "../assets/Encuentrodesanacion.jpeg";
 import "../styles/flipCards.css"; // Asegúrate de tener los estilos aquí o adaptarlos a Tailwind
-import creadorvirtual from "../assets/creadorvirtual.jpg";
-import tuemprendimiento from "../assets/tuemprendimiento.jpeg";
+
 import terapeuta3 from "../assets/Terapeuta3.jpg";
 
 const alianzas = [

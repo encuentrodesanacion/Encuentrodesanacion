@@ -330,12 +330,12 @@ const App = () => {
       >
         <div className="bg-gradient-to-r from-fuchsia-200 to-pink-600 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl text-yellow-400 text-center py-25 md:py-12 font-bold">
-            Dias de Ofrenda
+            Días de Ofrenda
             <p>(POR TIEMPO LIMITADO)</p>
           </h2>
 
           {/* Contenedor deslizable con snap */}
-          <div className="flex overflow-x-auto space-x-6 pb-6 snap-x snap-mandatory scroll-smooth">
+          <div className="flex justify-center flex-wrap gap-6 pb-6">
             {[
               {
                 title: "Finde talleres grupales",
@@ -351,22 +351,6 @@ const App = () => {
                   "https://psicoandres.cl/wp-content/uploads/2023/04/enfoque-holistico.jpg",
                 excerpt:
                   "Espacio donde los terapeutas se reunen para ofrendar sus terapias a valor amoroso durante 5 dias. Atendiéndote de la misma forma como si se pagara a valor normal",
-                buttonText: "Reserva tu hora",
-              },
-              {
-                title: "SPA LITTLE",
-                image:
-                  "https://soyuzbilingual.edu.pa/wp-content/uploads/2022/01/aprendizaje-holistico.jpg",
-                excerpt:
-                  "Espacio donde nuevos terapeutas están creciendo y ofrendando sus terapias a valor amoroso durante 3 dias",
-                buttonText: "Reserva tu hora",
-              },
-              {
-                title: "SPA LITTLE",
-                image:
-                  "https://soyuzbilingual.edu.pa/wp-content/uploads/2022/01/aprendizaje-holistico.jpg",
-                excerpt:
-                  "Espacio donde nuevos terapeutas están creciendo y ofrendando sus terapias a valor amoroso durante 3 dias",
                 buttonText: "Reserva tu hora",
               },
               {
@@ -410,7 +394,7 @@ const App = () => {
             <div>
               <Link to="/quienes-somos" className="block">
                 <h2 className="text-3xl md:text-4xl font-light mb-6 hover:underline cursor-pointer">
-                  Quienes Somos
+                  Quiénes Somos
                 </h2>
               </Link>
               <Link to="/Staff-Terapéutico" className="block">
