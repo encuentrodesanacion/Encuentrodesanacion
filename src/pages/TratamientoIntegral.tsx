@@ -8,6 +8,7 @@ import Terapeuta3 from "../assets/Terapeuta3.jpg";
 import Terapeuta4 from "../assets/Terapeuta4.jpg";
 import Terapeuta5 from "../assets/Terapeuta5.jpg";
 import Terapeuta6 from "../assets/Terapeuta6.jpg";
+import Terapeuta7 from "../assets/Terapeuta7.jpg";
 
 export default function TratamientoHolistico() {
   const navigate = useNavigate();
@@ -55,6 +56,13 @@ export default function TratamientoHolistico() {
       terapeuta: "Macarena del Rio",
       description:
         "Sanación ancestral que canaliza energía vital y luz de alta vibración para armonizar cuerpo, mente y alma. A través de símbolos sagrados y la guía de diosas como Sekhmet, libera bloqueos energéticos, alivia ansiedad, fatiga y estrés, y te reconecta con tu poder interior. Equilibra tu energía. Despierta tu esencia.",
+    },
+    {
+      img: Terapeuta7,
+      title: "Limpieza con Cruz de ANKH",
+      terapeuta: "Fabiola Valenzuela",
+      description:
+        "El ankh, cruz ankh o llave de la vida, es un símbolo muy antiguo, muy asociada al antiguo Egipto, donde grandes Dioses y faraones. Sus bendiciones son múltiples, por ello, en esta formación viajáremos hacia el pasado, para conocer la historia y significado del Ankh y como poder poner sus virtudes al servicio de todos los involucrados. También aprenderás los tipos de contamines que podremos diagnosticar con ayuda del péndulo, en personas, espacio u objeto, y obviamente como limpiarnos con nuestra amada Cruz Ankh",
     },
   ];
 
