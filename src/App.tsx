@@ -7,13 +7,17 @@ import {
 } from "react-router-dom";
 import Terapias from "./pages/Terapiasdeluz";
 import Home from "./pages/Home";
-import Navigation from "./components/Navigation";
+import ScrollToTop from "./components/ScrollToTop";
 import { CartProvider } from "./pages/CartContext";
 import ReservaForm from "./components/ReservaForm";
 import Carrito from "./components/Carrito";
 import CartIcon from "./components/CartIcon";
 import TratamientoHolistico from "./pages/TratamientoIntegral";
 import Alianzas from "./pages/Alianzas";
+import TallerMensual from "./pages/TalleresMensuales";
+import QuienesSomosPage from "./pages/QuienesSomos";
+import TerapeutasPage from "./pages/Staff";
+import ComunidadYLeadsPage from "./pages/ComunidadyLeads";
 
 export default function App() {
   return (
@@ -22,6 +26,7 @@ export default function App() {
         <CartIcon />
 
         {/* Asegúrate de que quieres mostrar siempre esta barra */}
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/terapeutasdeluz" element={<Terapias />} />
@@ -31,6 +36,11 @@ export default function App() {
           />
           <Route path="/alianzas" element={<Alianzas />} />
           {/* Ruta que redirige a la página principal si no hay coincidencias */}
+          <Route path="/tallermensual" element={<TallerMensual />} />
+          <Route path="/quienes-somos" element={<QuienesSomosPage />} />
+          <Route path="/staff-terapéutico" element={<TerapeutasPage />} />
+          <Route path="/nuestra-comunidad" element={<ComunidadYLeadsPage />} />
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>

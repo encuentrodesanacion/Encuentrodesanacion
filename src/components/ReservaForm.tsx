@@ -3,16 +3,21 @@ import { useCart, Reserva } from "../pages/CartContext";
 
 interface ReservaFormProps {
   servicio: string;
-  terapeuta: string; // ← Este es el prop correcto que recibes
+  terapeuta: string;
+  horasDisponibles?: string[]; // opcional
 }
 
-const ReservaForm = ({ servicio, terapeuta }: ReservaFormProps) => {
+const ReservaForm = ({
+  servicio,
+  terapeuta,
+  horasDisponibles,
+}: ReservaFormProps) => {
   const { addToCart } = useCart();
 
   const [form, setForm] = useState({
     fecha: "",
     hora: "",
-    precio: 30000, // Valor fijo por ahora
+    precio: 30000,
   });
 
   const handleChange = (
@@ -27,7 +32,7 @@ const ReservaForm = ({ servicio, terapeuta }: ReservaFormProps) => {
 
     const nuevaReserva: Reserva = {
       servicio,
-      especialidad: terapeuta, // ← Aquí se guarda el terapeuta como especialidad
+      especialidad: terapeuta,
       fecha: form.fecha,
       hora: form.hora,
       precio: form.precio,
@@ -42,7 +47,6 @@ const ReservaForm = ({ servicio, terapeuta }: ReservaFormProps) => {
       precio: 30000,
     });
 
-    // 👇 ENVÍO AUTOMÁTICO AL BACKEND CON FETCH
     fetch("http://localhost:3000/api/enviar-reserva", {
       method: "POST",
       headers: {
@@ -53,7 +57,7 @@ const ReservaForm = ({ servicio, terapeuta }: ReservaFormProps) => {
         especialidad: nuevaReserva.especialidad,
         fecha: nuevaReserva.fecha,
         hora: nuevaReserva.hora,
-        clienteId: 0, // Puedes cambiar esto si tienes un ID real del cliente
+        clienteId: 0,
         precio: nuevaReserva.precio,
       }),
     })
@@ -77,6 +81,28 @@ const ReservaForm = ({ servicio, terapeuta }: ReservaFormProps) => {
       className="max-w-md mx-auto bg-white p-6 rounded shadow"
     >
       <h3 className="text-xl font-bold mb-4">Reserva tu cupo</h3>
+
+      {/* Campo hora si hay horas disponibles */}
+      {horasDisponibles && (
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Hora disponible
+          </label>
+          <select
+            name="hora"
+            value={form.hora}
+            onChange={handleChange}
+            className="w-full border px-3 py-2 rounded"
+          >
+            <option value="">Seleccione una hora</option>
+            {horasDisponibles.map((hora) => (
+              <option key={hora} value={hora}>
+                {hora}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
 
       {/* Botón */}
       <button

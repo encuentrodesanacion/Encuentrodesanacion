@@ -8,7 +8,7 @@ const CartIcon = () => {
   const [open, setOpen] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null); // 🔑 Referencia al panel
 
-  const total = cart.reduce((acc, item) => acc + item.precio, 0);
+  const total = cart.reduce((acc, item) => acc + (item.precio ?? 0), 0);
 
   // 🔒 Cierra el carrito si haces clic fuera de él
   useEffect(() => {
@@ -87,21 +87,27 @@ const CartIcon = () => {
                   <p>
                     <strong>Especialidad:</strong> {item.especialidad}
                   </p>
+                  {item.sesiones && (
+                    <p>
+                      <strong>Sesiones:</strong> {item.sesiones}
+                    </p>
+                  )}
+                  {item.hora && (
+                    <p>
+                      <strong>Hora:</strong> {item.hora}
+                    </p>
+                  )}
                   <p>
-                    <strong>Sesiones:</strong> {item.sesiones}
-                  </p>
-                  <p>
-                    <strong>Precio:</strong> ${item.precio.toLocaleString()}
+                    <strong>Precio:</strong> ${item.precio?.toLocaleString()}
                   </p>
                   <button
                     className="mt-1 text-red-500 hover:text-red-700 text-xs underline"
                     onClick={() => {
-                      // Mostrar ventana de confirmación
                       const confirmDelete = window.confirm(
                         `¿Estás seguro de que deseas eliminar la terapia de "${item.servicio}" del carrito?`
                       );
                       if (confirmDelete) {
-                        removeFromCart(index); // Eliminar solo si el usuario confirma
+                        removeFromCart(index);
                       }
                     }}
                   >

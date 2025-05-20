@@ -8,7 +8,7 @@ export interface Reserva {
   especialidad?: string;
   fecha?: string;
   hora?: string;
-  precio: number;
+  precio?: number;
   sesiones?: number;
   terapeutaId?: string;
   clienteId?: string;

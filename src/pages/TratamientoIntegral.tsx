@@ -1,7 +1,12 @@
 import CartIcon from "../components/CartIcon";
 import { useNavigate } from "react-router-dom";
-import "../styles/terapiaDeLuz.css";
-import { useCart } from "./CartContext"; // ← importa el contexto del carrito
+import "../styles/tratamientoIntegral.css";
+import { useCart } from "./CartContext"; // ← importa el contexto del carrit
+import Terapeuta1 from "../assets/Terapeuta1.jpg";
+import Terapeuta2 from "../assets/Terapeuta2.jpg";
+import Terapeuta3 from "../assets/Terapeuta3.jpg";
+import Terapeuta4 from "../assets/Terapeuta4.jpg";
+import Terapeuta5 from "../assets/Terapeuta5.jpg";
 
 export default function TratamientoHolistico() {
   const navigate = useNavigate();
@@ -9,24 +14,34 @@ export default function TratamientoHolistico() {
 
   const terapias = [
     {
-      img: "https://ethic.es/wp-content/uploads/2023/03/imagen.jpg",
-      title: "Sanación Integral",
-      description: "Equilibrio físico, mental y espiritual.",
+      img: Terapeuta1,
+      title: "Canalización Energetica",
+      description:
+        "es una terapia en la cual una persona actúa como un conducto para recibir mensajes de guías espirituales,angeles, maestros ascendidos y seres fallecidos. Es una herramienta poderosa para la conexión con lo divino u el crecimiento personal. Es una forma de recibir orientación espiritual, sanar emocionalmente y obtener claridad sobre diversos aspectos de la vida",
     },
     {
-      img: "https://www.theclassyoga.com/wp-content/uploads/2021/08/yoga-1024x576.jpeg",
-      title: "Terapia Energética",
-      description: "Limpieza de bloqueos y armonización.",
+      img: Terapeuta2,
+      title: "La limpieza de lealtades transgeneracionales",
+      description:
+        "un proceso terapéutico que busca identificar y liberar patrones de comportamiento, emociones y creencias que se transmiten de generación en generación dentro de una familia. Estas lealtades invisibles pueden influir en la salud, el bienestar emocional, las relaciones de las personas, la estabilidad económica.El objetivo principal es identificar y romper estos patrones para que las personas puedan vivir de manera más autónoma y alineada con sus propias necesidades y deseos.",
     },
     {
-      img: "https://a.storyblok.com/f/97382/2000x1500/4c15e1224b/cover-benefits-of-yoga-and-meditation.png",
-      title: "Reiki",
-      description: "Canalización de energía para armonizar chakras.",
+      img: Terapeuta3,
+      title: "Tameana - Salush Nahí",
+      description:
+        " es una terapia vibracional que trabaja con cristales de cuarzo y geometría sagrada para armonizar chakras, liberar bloqueos y elevar la frecuencia energética. Se recomiendan ciclos de 3 sesiones para una transformación profunda.",
     },
     {
-      img: "https://via.placeholder.com/300x200",
-      title: "Liberación Emocional",
-      description: "Técnicas para soltar traumas y bloqueos.",
+      img: Terapeuta4,
+      title: "Péndulo Hebreo",
+      description:
+        "Libérate del estrés, mejora tu descanso y recupera tu energía con el Péndulo Hebreo. Esta técnica detecta y corrige desequilibrios energéticos, ayudándote a sentirte más liviano, claro y vital.",
+    },
+    {
+      img: Terapeuta5,
+      title: "Terapia de Respuesta Espiritual (Con Conexión Angelical)",
+      description:
+        "Esta maravillosa Técnica de Sanación te permitirá una conexión intima con tu Ser, nos ayudará a realizar una investigación para conocer todo aquello que quedo grabado en tu Alma y en tu mente subconsciente, que impide que evoluciones en esta vida y que puedas soltar que le pesa. Puedes solicitar este Tratamiento si quieres: Limpiar sentimientos, actitudes y emociones toxicas. (Ansiedad, Depresión, etc.) Limpiar patrones emocionales familiares, de pareja, laborales. Remover bloqueos de cualquier índole, incluyendo energías de bajo astral  (hechicería, magia negra, envidia, etc.). Re-conectarás con tu esencia para que puedas iniciar cambios positivos en tu vida.",
     },
   ];
 
@@ -57,6 +72,12 @@ export default function TratamientoHolistico() {
         </h1>
         <CartIcon />
       </header>
+      <button
+        onClick={() => navigate("/")}
+        className="fixed top-20 left-6 z-40 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+      >
+        Volver al Inicio
+      </button>
 
       <h2 className="text-3xl font-bold text-center text-pink-700 mb-6">
         Bienvenido al Tratamiento Integral
@@ -107,13 +128,6 @@ export default function TratamientoHolistico() {
           </div>
         ))}
       </div>
-
-      <button
-        onClick={() => navigate("/")}
-        className="mt-10 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 block mx-auto"
-      >
-        Volver al Inicio
-      </button>
     </div>
   );
 }

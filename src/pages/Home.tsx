@@ -1,4 +1,4 @@
-import { useState, useRef, ForwardedRef, forwardRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import {
   Menu,
@@ -14,13 +14,13 @@ import {
   Orbit,
 } from "lucide-react";
 // import ReservaHora from "../ReservaHora";
-
+import CarruselAlianzas from "./CarruselAlianzas";
 import encuentroImage from "../assets/Encuentrodesanacion.jpeg";
+import creadorvirtual from "../assets/creadorvirtual.jpg";
 import { Link } from "react-router-dom";
 import CartIcon from "../components/CartIcon";
-import TratamientoHolistico from "./TratamientoIntegral";
+
 const App = () => {
-  const reservaRef = useRef<HTMLDivElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false); // menú mobile
   const [servicioSeleccionado, setServicioSeleccionado] = useState("");
   const [especialidadSeleccionada, setEspecialidadSeleccionada] = useState("");
@@ -35,6 +35,7 @@ const App = () => {
       }
     }
   }, [location]);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
@@ -68,16 +69,23 @@ const App = () => {
                 Servicios
               </a>
               <a
+                href="#alianzas"
+                className="text-blue-300 hover:text-white font-bold"
+              >
+                Alianzas
+              </a>
+              <a
                 href="#otros"
                 className="text-blue-300 hover:text-white font-bold"
               >
-                Otros
+                Días de ofrenda
               </a>
+
               <a
                 href="#contacto"
                 className="text-blue-300 hover:text-white font-bold"
               >
-                Contacto
+                Sobre nosotros
               </a>
             </div>
 
@@ -111,6 +119,12 @@ const App = () => {
                 Servicios
               </a>
               <a
+                href="#alianzas"
+                className="block px-3 py-2 text-white/70 hover:text-pastel-green"
+              >
+                Alianzas
+              </a>
+              <a
                 href="#otros"
                 className="block px-3 py-2 text-white/70 hover:text-pastel-green"
               >
@@ -121,6 +135,12 @@ const App = () => {
                 className="block px-3 py-2 text-white/70 hover:text-pastel-green"
               >
                 Contacto
+              </a>
+              <a
+                href="#QuienesSomos"
+                className="text-blue-300 hover:text-white font-bold"
+              >
+                Sobre nosotros
               </a>
             </div>
           </div>
@@ -140,10 +160,10 @@ const App = () => {
               </h1>
 
               <p className="text-lg text-gray-600 mb-8">
-                Bienvenidos al Primer Spa Holístico Online. De Chile para el
-                Mundo. Aquí encontrarás a los mejores especialistas Holísticos
-                quienes te ayudarán a avanzar en tu proceso de Sanación, ya sea
-                emocional, física, mental y/o espiritual.
+                Bienvenido valiente al Primer Spa Holístico Online. De Chile
+                para el Mundo. Aquí encontrarás a los mejores especialistas
+                Holísticos quienes te ayudarán a avanzar en tu proceso de
+                Sanación, ya sea emocional, física, mental y/o espiritual.
               </p>
             </div>
             <div className="relative">
@@ -218,19 +238,16 @@ const App = () => {
                   "Encuentros grupales para reconectar con tu esencia, liberar bloqueos y activar tu energía interior. (Yoga, Yoga Infantil, Pilates, etc.)",
                 price: "Desde 33.000CLP / €43 / $45USD,",
                 button: (
-                  <a
-                    href="#reserva"
-                    className="inline-block mt-4 px-4 py-2 bg-cyan-400/60 text-black font-medium rounded-full hover:bg-pastel-green/80 transition"
-                    onClick={() => {
-                      setServicioSeleccionado("Talleres Mensuales");
-                      setEspecialidadSeleccionada("");
-                    }}
-                  >
-                    Reserva tu cupo
-                  </a>
+                  <div className="flex flex-col gap-2 mt-4">
+                    <Link
+                      to="/tallermensual"
+                      className="mt-2 px-3 py-1 bg-cyan-600 text-white text-sm rounded hover:bg-cyan-700"
+                    >
+                      Ver más detalles
+                    </Link>
+                  </div>
                 ),
               },
-
               {
                 icon: <Earth className="w-8 h-8 mb-4 text-yellow-500" />,
                 title: "Spa Holístico al Mundo",
@@ -248,6 +265,26 @@ const App = () => {
                   </a>
                 ),
               },
+
+              {
+                icon: <Orbit className="w-8 h-8 mb-4 text-yellow-500" />,
+                title: "Alianzas",
+                description:
+                  "¿Tienes un proyecto, emprendimiento o servicio alineado con el bienestar, conciencia o la transformación personal? Te ofrecemos visibilidad real, contarás con mayor alcance y tus clientes podrán contar con beneficios en nuestro sitio web: ¡Cientos de personas podrán descubrirte!, Nos mueve la colaboración genuina. Únete y forma parte de una red de almas con propósito",
+
+                button: (
+                  <div className="flex flex-col gap-2 mt-4">
+                    <a
+                      href="https://forms.gle/n9cKSVDw9vjzB8QC8"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-2 px-3 py-1 bg-cyan-600 text-white text-sm rounded hover:bg-cyan-700 text-center"
+                    >
+                      Realizar Formulario
+                    </a>
+                  </div>
+                ),
+              },
               {
                 icon: <SmilePlus className="w-8 h-8 mb-4 text-yellow-500" />,
                 title:
@@ -255,35 +292,17 @@ const App = () => {
                 description:
                   "Programa enfocado en lograr un bienestar Físico, Mental y/o Emocional. Utilizando diversas técnicas Holísticas para generar índices más altos de productividad y rendimiento.",
                 price:
-                  "Este servicio es especial y puede variar según tus necesidades.",
-                button: (
-                  <a
-                    href="mailto:evaldesnew@gmail.com?subject=Consulta&body=Hola,%20me%20gustaría%20saber%20más%20sobre..."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block mt-4 px-4 py-2 bg-cyan-400/60 text-black font-medium rounded-full hover:bg-pastel-green/80 transition"
-                  >
-                    Contáctanos
-                  </a>
-                ),
-              },
-
-              {
-                icon: <Orbit className="w-8 h-8 mb-4 text-yellow-500" />,
-                title: "Alianzas",
-                description:
-                  "Adquiere tus descuentos con nuestras diferentes alianzas para avanzar aun mas en tu proceso de sanación",
-                price: "Desde 7.000CLP / €17 / 19USD",
-                button: (
-                  <div className="flex flex-col gap-2 mt-4">
-                    <Link
-                      to="/alianzas"
-                      className="mt-2 px-3 py-1 bg-cyan-600 text-white text-sm rounded hover:bg-cyan-700"
-                    >
-                      Ver más detalles
-                    </Link>
-                  </div>
-                ),
+                  "Este servicio es especial y puede variar según tus necesidades. Conoce nuestra propuesta spaholistico@encuentrodesanacion.com",
+                // button: (
+                //   <a
+                //     href="mailto:evaldesnew@gmail.com?subject=Consulta&body=Hola,%20me%20gustaría%20saber%20más%20sobre..."
+                //     target="_blank"
+                //     rel="noopener noreferrer"
+                //     className="inline-block mt-4 px-4 py-2 bg-cyan-400/60 text-black font-medium rounded-full hover:bg-pastel-green/80 transition"
+                //   >
+                //     Contáctanos
+                //   </a>
+                // ),
               },
             ].map((service, index) => (
               <div key={index} className="bg-gray-900 p-8 rounded-2xl">
@@ -297,6 +316,10 @@ const App = () => {
           </div>
         </div>
       </section>
+
+      <section id="alianzas">
+        <CarruselAlianzas />
+      </section>
       {/* Componente ReservaHora agregado aquí abajo */}
 
       {/* Blog Preview Section */}
@@ -305,41 +328,59 @@ const App = () => {
         id="otros"
         className="py-0 bg-gradient-to-r from-pastel-green to-pastel-mint/10"
       >
-        <div className=" bg-gradient-to-r from-fuchsia-200 to-pink-600 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl text-yellow-400 text-center  py-25 md:py-12 font-bold">
+        <div className="bg-gradient-to-r from-fuchsia-200 to-pink-600 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl text-yellow-400 text-center py-25 md:py-12 font-bold">
             Dias de Ofrenda
+            <p>(POR TIEMPO LIMITADO)</p>
           </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          {/* Contenedor deslizable con snap */}
+          <div className="flex overflow-x-auto space-x-6 pb-6 snap-x snap-mandatory scroll-smooth">
             {[
               {
-                title: "Forma parte de nuestro STAFF",
+                title: "Finde talleres grupales",
                 image:
                   "https://www.cipmex.org/wp-content/uploads/2019/05/27-1.jpg",
                 excerpt:
-                  "¿Sientes el llamado de compartir tu medicina con el mundo? Postula para ser parte de nuestra comunidad de terapeutas y facilita tu don a quienes lo necesitan desde el corazón.",
-                buttonText: "Quiero ser parte del STAFF",
+                  "Talleres y terapias grupales a valor amoroso durante 3 dias",
+                buttonText: "Reserva tu cupo",
               },
-
               {
                 title: "SPA PRINCIPAL",
                 image:
                   "https://psicoandres.cl/wp-content/uploads/2023/04/enfoque-holistico.jpg",
                 excerpt:
-                  "Un espacio para terapeutas consolidados que desean ofrecer sus servicios en jornadas especiales de 5 días, con enfoque en bienestar integral y sanación consciente.",
-                buttonText: "Postula al Spa Principal",
+                  "Espacio donde los terapeutas se reunen para ofrendar sus terapias a valor amoroso durante 5 dias. Atendiéndote de la misma forma como si se pagara a valor normal",
+                buttonText: "Reserva tu hora",
               },
               {
                 title: "SPA LITTLE",
                 image:
                   "https://soyuzbilingual.edu.pa/wp-content/uploads/2022/01/aprendizaje-holistico.jpg",
                 excerpt:
-                  "Dedicado a terapeutas en formación o en sus primeras experiencias. Un entorno seguro para comenzar a compartir tus terapias durante 3 días al mes.",
+                  "Espacio donde nuevos terapeutas están creciendo y ofrendando sus terapias a valor amoroso durante 3 dias",
+                buttonText: "Reserva tu hora",
+              },
+              {
+                title: "SPA LITTLE",
+                image:
+                  "https://soyuzbilingual.edu.pa/wp-content/uploads/2022/01/aprendizaje-holistico.jpg",
+                excerpt:
+                  "Espacio donde nuevos terapeutas están creciendo y ofrendando sus terapias a valor amoroso durante 3 dias",
+                buttonText: "Reserva tu hora",
+              },
+              {
+                title: "SPA LITTLE",
+                image:
+                  "https://soyuzbilingual.edu.pa/wp-content/uploads/2022/01/aprendizaje-holistico.jpg",
+                excerpt:
+                  "Espacio donde nuevos terapeutas están creciendo y ofrendando sus terapias a valor amoroso durante 3 dias",
                 buttonText: "Reserva tu hora",
               },
             ].map((post, index) => (
               <div
                 key={index}
-                className="bg-white rounded-2xl overflow-hidden shadow-lg"
+                className="min-w-[300px] max-w-xs bg-white rounded-2xl overflow-hidden shadow-lg flex-shrink-0 snap-start"
               >
                 <img
                   src={post.image}
@@ -350,7 +391,7 @@ const App = () => {
                   <h3 className="text-xl font-light mb-2">{post.title}</h3>
                   <p className="text-gray-600">{post.excerpt}</p>
                   <a
-                    href="#contacto" // puedes cambiar esto a un enlace real o mailto
+                    href="#contacto"
                     className="text-black hover:text-pastel-green mt-4 inline-block font-medium"
                   >
                     {post.buttonText} →
@@ -361,14 +402,29 @@ const App = () => {
           </div>
         </div>
       </section>
+
       {/* Contact Section */}
       <section id="contacto" className="py-16 md:py-24 bg-black text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12">
             <div>
-              <h2 className="text-3xl md:text-4xl font-light mb-6">
-                Comienza Tu Viaje
-              </h2>
+              <Link to="/quienes-somos" className="block">
+                <h2 className="text-3xl md:text-4xl font-light mb-6 hover:underline cursor-pointer">
+                  Quienes Somos
+                </h2>
+              </Link>
+              <Link to="/Staff-Terapéutico" className="block">
+                <h2 className="text-3xl md:text-4xl font-light mb-6 hover:underline cursor-pointer">
+                  Staff Terapéutico
+                </h2>
+              </Link>
+              <div>
+                <Link to="/nuestra-comunidad" className="block">
+                  <h2 className="text-3xl md:text-4xl font-light mb-6 hover:underline cursor-pointer">
+                    Nuestra Comunidad
+                  </h2>
+                </Link>
+              </div>
               <p className="text-gray-400 mb-8">
                 Da el primer paso hacia una vida más consciente y equilibrada.
               </p>
@@ -403,8 +459,15 @@ const App = () => {
                 </div>
               </div>
             </div>
+
             <form className="space-y-6">
               <div>
+                <h1 className="text-center text-lg font-semibold text-white mb-4">
+                  Si tienes alguna sugerencia o problema de navegación en la
+                  página web, escríbelo aquí para tener respuestas del soporte
+                  técnico e ir mejorando este espacio para todos.
+                </h1>
+
                 <label
                   htmlFor="name"
                   className="block text-sm font-light text-gray-300"
@@ -414,9 +477,10 @@ const App = () => {
                 <input
                   type="text"
                   id="name"
-                  className="mt-1 block w-full rounded-lg bg-white-900 border-gray-800 text-white focus:ring-pastel-green focus:border-pastel-green"
+                  className="mt-1 block w-full rounded-lg bg-white-900 border border-gray-800 text-white focus:ring-pastel-green focus:border-pastel-green"
                 />
               </div>
+
               <div>
                 <label
                   htmlFor="email"
@@ -427,9 +491,10 @@ const App = () => {
                 <input
                   type="email"
                   id="email"
-                  className="mt-1 block w-full rounded-lg bg-white-900 border-gray-800 text-white focus:ring-pastel-green focus:border-pastel-green"
+                  className="mt-1 block w-full rounded-lg bg-white-900 border border-gray-800 text-white focus:ring-pastel-green focus:border-pastel-green"
                 />
               </div>
+
               <div>
                 <label
                   htmlFor="message"
@@ -440,9 +505,10 @@ const App = () => {
                 <textarea
                   id="message"
                   rows={4}
-                  className="mt-1 block w-full rounded-lg bg-white-900 border-gray-800 text-white focus:ring-pastel-green focus:border-pastel-green"
+                  className="mt-1 block w-full rounded-lg bg-white-900 border border-gray-800 text-white focus:ring-pastel-green focus:border-pastel-green"
                 ></textarea>
               </div>
+
               <button
                 type="submit"
                 className="w-full bg-pastel-green text-black px-6 py-3 rounded-full hover:bg-pastel-green/90 transition-colors"
