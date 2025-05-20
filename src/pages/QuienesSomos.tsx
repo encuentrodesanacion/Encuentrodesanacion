@@ -40,12 +40,12 @@ const Directora = () => (
   </section>
 );
 
-const Trayectoria = () => (
-  <section id="trayectoria" className="py-10 px-6 max-w-4xl mx-auto">
-    <h2 className="text-3xl font-bold mb-4">Trayectoria</h2>
-    <p>Encuentro de Sanación inició el 25 de abril del año 2022 ,</p>
-  </section>
-);
+// const Trayectoria = () => (
+//   <section id="trayectoria" className="py-10 px-6 max-w-4xl mx-auto">
+//     <h2 className="text-3xl font-bold mb-4">Trayectoria</h2>
+//     <p>Encuentro de Sanación inició el 25 de abril del año 2022 ,</p>
+//   </section>
+// );
 
 const Proposito = () => (
   <section id="proposito" className="py-10 px-6 max-w-4xl mx-auto">
@@ -111,7 +111,7 @@ const QuienesSomosPage = () => {
     <div>
       <QuiénesSomos />
       <Directora />
-      <Trayectoria />
+      {/* <Trayectoria /> */}
       <Proposito />
       <Mision />
 
