@@ -57,13 +57,6 @@ export default function TratamientoHolistico() {
       description:
         "Sanación ancestral que canaliza energía vital y luz de alta vibración para armonizar cuerpo, mente y alma. A través de símbolos sagrados y la guía de diosas como Sekhmet, libera bloqueos energéticos, alivia ansiedad, fatiga y estrés, y te reconecta con tu poder interior. Equilibra tu energía. Despierta tu esencia.",
     },
-    {
-      img: Terapeuta7,
-      title: "Limpieza con Cruz de ANKH",
-      terapeuta: "Fabiola Valenzuela",
-      description:
-        "El ankh, cruz ankh o llave de la vida, es un símbolo muy antiguo, muy asociada al antiguo Egipto, donde grandes Dioses y faraones. Sus bendiciones son múltiples, por ello, en esta formación viajáremos hacia el pasado, para conocer la historia y significado del Ankh y como poder poner sus virtudes al servicio de todos los involucrados. También aprenderás los tipos de contamines que podremos diagnosticar con ayuda del péndulo, en personas, espacio u objeto, y obviamente como limpiarnos con nuestra amada Cruz Ankh",
-    },
   ];
 
   // 🔁 Función para agregar al carrito según sesiones

@@ -4,6 +4,7 @@ import "../components/ReservaHora";
 import ReservaForm from "../components/ReservaForm";
 import CartIcon from "../components/CartIcon"; // Icono del carrito
 import terapeuta3 from "../assets/Terapeuta3.jpg";
+import Terapeuta7 from "../assets/Terapeuta7.jpg";
 
 const imagenes = [
   {
@@ -14,7 +15,7 @@ const imagenes = [
     link: "#",
   },
   {
-    src: "https://wallpapers.com/images/featured/imagenes-lindas-para-perfil-estetico-r521rmfa6ucixtw5.jpg",
+    src: Terapeuta7,
     alt: "Sesión de Pendulo Hebreo",
     descripcion: "Texto de prueba",
     link: "#",
@@ -51,7 +52,9 @@ export default function Terapias() {
     <>
       {/* Header fijo con el carrito */}
       <header className="fixed top-0 left-0 w-full bg-white shadow z-50 flex justify-between items-center px-6 py-4">
-        <h1 className="text-xl font-semibold text-gray-800">Terapias de Luz</h1>
+        <h1 className="text-xl font-semibold text-gray-800">
+          Formación Terapeutas de la Luz
+        </h1>
         <CartIcon />
       </header>
 
@@ -70,7 +73,7 @@ export default function Terapias() {
           Volver a Inicio
         </button>
 
-        <h2 className="text-lg font-bold mt-6 mb-4">Terapeutas:</h2>
+        <h2 className="text-lg font-bold mt-6 mb-4">Menciones:</h2>
 
         <div className="flip-wrapper-container">
           {imagenes.map((img, index) => (
