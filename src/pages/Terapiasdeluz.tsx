@@ -5,6 +5,9 @@ import ReservaForm from "../components/ReservaForm";
 import CartIcon from "../components/CartIcon"; // Icono del carrito
 import terapeuta3 from "../assets/Terapeuta3.jpg";
 import Terapeuta7 from "../assets/Terapeuta7.jpg";
+import terapeuta9 from "../assets/Terapeuta9.jpg";
+import terapeuta6 from "../assets/Terapeuta6.jpg";
+import creadorvirtual from "../assets/creadorvirtual.jpg";
 
 const imagenes = [
   {
@@ -13,6 +16,7 @@ const imagenes = [
     descripcion:
       "La Canalización es la capacidad de recibir información energética a través de la intuición y los sentidos sutiles. Se caracteriza por la conexión con guías espirituales, la percepción extrasensorial y la apertura a energías elevadas. En este curso exploraremos la glándula pineal, el aura, los elementales y la comunicación animal, integrando técnicas prácticas para fortalecer la recepción de mensajes energéticos. Los beneficios son desarrollar herramientas esenciales para lograr claridad intuitiva, expansión sensorial y fortalecimiento de la conexión energética",
     link: "#",
+    terapeuta: "Mónica Gatica",
   },
   {
     src: Terapeuta7,
@@ -20,29 +24,35 @@ const imagenes = [
     descripcion:
       "El ankh, cruz ankh o llave de la vida, es un símbolo muy antiguo, muy asociada al antiguo Egipto, donde grandes Dioses y faraones. Sus bendiciones son múltiples, por ello, en esta formación viajáremos hacia el pasado, para conocer la historia y significado del Ankh y como poder poner sus virtudes al servicio de todos los involucrados. También aprenderás los tipos de contamines que podremos diagnosticar con ayuda del péndulo, en personas, espacio u objeto, y obviamente como limpiarnos con nuestra amada Cruz Ankh",
     link: "#",
+    terapeuta: "ale",
   },
   {
-    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAS92gYn8cWwD9JqRAUleYJiHgMO4bjEfFug&s",
-    alt: "Cabina de luz azul",
-    descripcion: "Texto de Prueba",
+    src: terapeuta9,
+    alt: "Tarot",
+    descripcion:
+      "En esta formación aprenderás a conectar con tu intuición para ir descubriendo el lenguaje mágico del Tarot, preparar tu espacio y consagrar tus cartas. podras interpretar los símbolos y colores de los arcanos y utilizar tu tarot como una fuente inagotable de información que sera tu guía tanto de desarrollo personal como también  una forma de meditación , aprenderas diferentes tipos de tiradas que te servirán para orientar a otros y comenzar este hermoso camino espiritual",
     link: "#",
+    terapeuta: "Jacqueline Zepeda",
   },
   {
-    src: "https://plus.unsplash.com/premium_photo-1695405363183-e55554168063?fm=jpg&q=60&w=3000",
-    alt: "Texto de prueba 2 ",
+    src: terapeuta6,
+    alt: "Reprogramación Neurolingüistica Emocional",
     link: "#",
+    terapeuta: "Macarena del Río",
   },
   {
-    src: "https://www.shutterstock.com/image-illustration/david-street-style-graphic-designtextile-600nw-2265632523.jpg",
+    src: creadorvirtual,
     alt: "Terapia combinada",
     descripcion: "Texto de prueba 3",
     link: "#",
+    terapeuta: "Texto de prueba",
   },
   {
-    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxFvoRX4Y_mAxPaWqaHP5XBrWmjd47UfiM0A&s",
-    alt: "Fototerapia LED",
+    src: creadorvirtual,
+    alt: "texto de prueba",
     descripcion: "Texto de prueba 4",
     link: "#",
+    terapeuta: "texto de prueba",
   },
 ];
 
@@ -83,6 +93,9 @@ export default function Terapias() {
                 {/* Frente de la tarjeta */}
                 <div className="flip-front">
                   <img src={img.src} alt={img.alt} />
+                  <div className="nombre-overlay">
+                    <p>{img.terapeuta}</p>
+                  </div>
                 </div>
 
                 {/* Reverso de la tarjeta */}
