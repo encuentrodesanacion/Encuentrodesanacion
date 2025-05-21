@@ -21,7 +21,7 @@ export default function TratamientoHolistico() {
       title: "Canalización Energetica",
       terapeuta: "Brenda Rivas",
       description:
-        "es una terapia en la cual una persona actúa como un conducto para recibir mensajes de guías espirituales,angeles, maestros ascendidos y seres fallecidos. Es una herramienta poderosa para la conexión con lo divino u el crecimiento personal. Es una forma de recibir orientación espiritual, sanar emocionalmente y obtener claridad sobre diversos aspectos de la vida",
+        "Es una terapia en la cual una persona actúa como un conducto para recibir mensajes de guías espirituales,angeles, maestros ascendidos y seres fallecidos. Es una herramienta poderosa para la conexión con lo divino u el crecimiento personal. Es una forma de recibir orientación espiritual, sanar emocionalmente y obtener claridad sobre diversos aspectos de la vida",
       opciones: [{ sesiones: 3, precio: 55000 }],
     },
     {
@@ -29,7 +29,7 @@ export default function TratamientoHolistico() {
       title: "La limpieza de lealtades transgeneracionales",
       terapeuta: "Betsy Bolivar",
       description:
-        "un proceso terapéutico que busca identificar y liberar patrones de comportamiento, emociones y creencias que se transmiten de generación en generación dentro de una familia. Estas lealtades invisibles pueden influir en la salud, el bienestar emocional, las relaciones de las personas, la estabilidad económica.El objetivo principal es identificar y romper estos patrones para que las personas puedan vivir de manera más autónoma y alineada con sus propias necesidades y deseos.",
+        "Un proceso terapéutico que busca identificar y liberar patrones de comportamiento, emociones y creencias que se transmiten de generación en generación dentro de una familia. Estas lealtades invisibles pueden influir en la salud, el bienestar emocional, las relaciones de las personas, la estabilidad económica.El objetivo principal es identificar y romper estos patrones para que las personas puedan vivir de manera más autónoma y alineada con sus propias necesidades y deseos.",
       opciones: [
         { sesiones: 3, precio: 55000 },
         { sesiones: 4, precio: 70000 },
@@ -41,7 +41,7 @@ export default function TratamientoHolistico() {
       title: "Tameana - Salush Nahí",
       terapeuta: "Mónica García",
       description:
-        " es una terapia vibracional que trabaja con cristales de cuarzo y geometría sagrada para armonizar chakras, liberar bloqueos y elevar la frecuencia energética. Se recomiendan ciclos de 3 sesiones para una transformación profunda.",
+        "Es una terapia vibracional que trabaja con cristales de cuarzo y geometría sagrada para armonizar chakras, liberar bloqueos y elevar la frecuencia energética. Se recomiendan ciclos de 3 sesiones para una transformación profunda.",
       opciones: [{ sesiones: 3, precio: 55000 }],
     },
     {
