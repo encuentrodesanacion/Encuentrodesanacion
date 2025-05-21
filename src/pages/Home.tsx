@@ -342,24 +342,26 @@ const App = () => {
                 image:
                   "https://www.cipmex.org/wp-content/uploads/2019/05/27-1.jpg",
                 excerpt:
-                  "Talleres y terapias grupales a valor amoroso durante 3 dias",
+                  "Talleres y terapias grupales a valor amoroso durante 3 días",
                 buttonText: "Reserva tu cupo",
+                link: "/talleres",
               },
               {
                 title: "SPA PRINCIPAL",
                 image:
                   "https://psicoandres.cl/wp-content/uploads/2023/04/enfoque-holistico.jpg",
                 excerpt:
-                  "Espacio donde los terapeutas se reunen para ofrendar sus terapias a valor amoroso durante 5 dias. Atendiéndote de la misma forma como si se pagara a valor normal",
-                buttonText: "Reserva tu hora",
+                  "Espacio donde los terapeutas se reúnen para ofrendar sus terapias...",
+                buttonText: "Ir al Spa Principal",
+                link: "/spaprincipal",
               },
               {
                 title: "SPA LITTLE",
                 image:
                   "https://soyuzbilingual.edu.pa/wp-content/uploads/2022/01/aprendizaje-holistico.jpg",
-                excerpt:
-                  "Espacio donde nuevos terapeutas están creciendo y ofrendando sus terapias a valor amoroso durante 3 dias",
+                excerpt: "Espacio donde nuevos terapeutas están creciendo...",
                 buttonText: "Reserva tu hora",
+                link: "/spalittle",
               },
             ].map((post, index) => (
               <div
@@ -374,12 +376,12 @@ const App = () => {
                 <div className="p-6">
                   <h3 className="text-xl font-light mb-2">{post.title}</h3>
                   <p className="text-gray-600">{post.excerpt}</p>
-                  <a
-                    href="#contacto"
+                  <Link
+                    to={post.link}
                     className="text-black hover:text-pastel-green mt-4 inline-block font-medium"
                   >
                     {post.buttonText} →
-                  </a>
+                  </Link>
                 </div>
               </div>
             ))}

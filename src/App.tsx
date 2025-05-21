@@ -18,6 +18,7 @@ import TallerMensual from "./pages/TalleresMensuales";
 import QuienesSomosPage from "./pages/QuienesSomos";
 import TerapeutasPage from "./pages/Staff";
 import ComunidadYLeadsPage from "./pages/ComunidadyLeads";
+import SpaPrincipal from "./pages/SpaPrincipal";
 
 export default function App() {
   return (
@@ -39,6 +40,7 @@ export default function App() {
           <Route path="/tallermensual" element={<TallerMensual />} />
           <Route path="/quienes-somos" element={<QuienesSomosPage />} />
           <Route path="/staff-terapéutico" element={<TerapeutasPage />} />
+          <Route path="/spaprincipal" element={<SpaPrincipal />} />
           <Route path="/nuestra-comunidad" element={<ComunidadYLeadsPage />} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
