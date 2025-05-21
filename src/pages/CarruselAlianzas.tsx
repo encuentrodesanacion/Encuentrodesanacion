@@ -2,6 +2,9 @@ import Encuentrodesanacion from "../assets/Encuentrodesanacion.jpeg";
 import "../styles/flipCards.css"; // Asegúrate de tener los estilos aquí o adaptarlos a Tailwind
 import creadorvirtual from "../assets/creadorvirtual.jpg";
 import tuemprendimiento from "../assets/tuemprendimiento.jpeg";
+import hazlo from "../assets/hazlo.jpg";
+import confiaenelproceso from "../assets/confiaenelproceso.jpg";
+import nuncaolvides from "../assets/nuncaolvides.jpg";
 
 const alianzas = [
   {
@@ -12,20 +15,20 @@ const alianzas = [
   {
     nombre: "Encuentro de sanación",
     url: "https://www.instagram.com/encuentrodesanacion/",
-    imagen: Encuentrodesanacion,
-    descripcion: "Eventos de sanación y transformación. ¡Siente la energía!",
+    imagen: hazlo,
+    descripcion: "Obtén visibilidad real y comparte sanación.",
   },
   {
-    nombre: "Tu Emprendimiento",
+    nombre: "¡Atrevete y sé parte de nuestras alianzas!",
     url: "h",
-    imagen: tuemprendimiento,
-    descripcion: "Eventos de sanación y transformación. ¡Siente la energía!",
+    imagen: confiaenelproceso,
+    descripcion: "Obtén visibilidad real y comparte sanación.",
   },
   {
-    nombre: "Encuentro de sanación",
+    nombre: "¡Atrevete y sé parte de nuestras alianzas!",
     url: "https://www.instagram.com/encuentrodesanacion/",
-    imagen: Encuentrodesanacion,
-    descripcion: "Eventos de sanación y transformación. ¡Siente la energía!",
+    imagen: nuncaolvides,
+    descripcion: "Obtén visibilidad real y comparte sanación.",
   },
 ];
 
