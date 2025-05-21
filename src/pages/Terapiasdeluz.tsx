@@ -37,6 +37,8 @@ const imagenes = [
   {
     src: terapeuta6,
     alt: "Reprogramación Neurolingüistica Emocional",
+    descripcion:
+      "¿Quieres multiplicar tus éxitos y despertar tu máximo potencial? En este curso descubrirás cómo leer e influir en el lenguaje corporal, facial y verbal para comunicar con verdadera autoridad; activar anclajes que disparen estados de alto rendimiento al instante; y derribar creencias limitantes que frenan tu crecimiento y el de quienes acompañas. Desarrollarás una empatía poderosa y un rapport inmediato que te abrirá puertas, aprenderás a diseñar objetivos claros y estrategias de automotivación infalibles, y a gestionar el estrés para mantenerte en equilibrio pleno. Ideal para terapeutas, psicólogos, gerentes, empresarios, profesores… y para todo aquel que quiera liderar con autenticidad y generar cambios extraordinarios.",
     link: "#",
     terapeuta: "Macarena del Río",
   },
