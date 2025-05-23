@@ -1,8 +1,5 @@
-import { ReactNode, createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, ReactNode } from "react";
 
-// Define el tipo de cada ítem en el carrito
-
-// CartContext.tsx
 export interface Reserva {
   servicio?: string;
   especialidad?: string;
@@ -15,16 +12,18 @@ export interface Reserva {
   cantidad?: number;
   nombre?: string;
   categoria?: string;
-  id?: number; // Si decides mantener el campo id opcional
+  id?: number;
+  correo?: string;
 }
 
-// Crear el contexto para el carrito de compras
-export const CartContext = createContext<{
+interface CartContextType {
   cart: Reserva[];
   addToCart: (item: Reserva) => void;
   removeFromCart: (index: number) => void;
   clearCart: () => void;
-}>({
+}
+
+export const CartContext = createContext<CartContextType>({
   cart: [],
   addToCart: () => {},
   removeFromCart: () => {},
@@ -35,15 +34,12 @@ interface CartProviderProps {
   children: ReactNode;
 }
 
-// El componente CartProvider
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = useState<Reserva[]>([]);
 
   const addToCart = (item: Reserva) => setCart((prev) => [...prev, item]);
-
-  const removeFromCart = (id: number) =>
-    setCart((prev) => prev.filter((_, index) => index !== id));
-
+  const removeFromCart = (index: number) =>
+    setCart((prev) => prev.filter((_, i) => i !== index));
   const clearCart = () => setCart([]);
 
   return (
@@ -55,5 +51,8 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   );
 };
 
-// Hook para acceder al contexto del carrito
-export const useCart = () => useContext(CartContext);
+export const useCart = (): CartContextType => {
+  const context = useContext(CartContext);
+  if (!context) throw new Error("useCart must be used within a CartProvider");
+  return context;
+};

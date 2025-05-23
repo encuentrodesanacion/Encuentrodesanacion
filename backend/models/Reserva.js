@@ -1,5 +1,5 @@
-import { DataTypes } from "sequelize";
-import sequelize from "../sequelize.js";
+const { DataTypes } = require("sequelize");
+const sequelize = require("../sequelize");
 
 const Reserva = sequelize.define("Reserva", {
   servicio: {
@@ -8,7 +8,7 @@ const Reserva = sequelize.define("Reserva", {
   },
   especialidad: {
     type: DataTypes.STRING,
-    allowNull: true, // explícito para aclarar que puede ser nulo
+    allowNull: true,
   },
   fecha: {
     type: DataTypes.STRING,
@@ -22,10 +22,22 @@ const Reserva = sequelize.define("Reserva", {
     type: DataTypes.INTEGER,
     allowNull: true,
   },
+  clienteNombre: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  clienteEmail: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  clienteTelefono: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   precio: {
     type: DataTypes.INTEGER,
     allowNull: true,
   },
 });
 
-export default Reserva;
+module.exports = Reserva;

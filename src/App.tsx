@@ -9,11 +9,10 @@ import Terapias from "./pages/Terapiasdeluz";
 import Home from "./pages/Home";
 import ScrollToTop from "./components/ScrollToTop";
 import { CartProvider } from "./pages/CartContext";
-import ReservaForm from "./components/ReservaForm";
 
 import CartIcon from "./components/CartIcon";
 import TratamientoHolistico from "./pages/TratamientoIntegral";
-import Alianzas from "./pages/Alianzas";
+
 import TallerMensual from "./pages/TalleresMensuales";
 import QuienesSomosPage from "./pages/QuienesSomos";
 import TerapeutasPage from "./pages/Staff";
@@ -35,11 +34,12 @@ export default function App() {
             path="/tratamientointegral"
             element={<TratamientoHolistico />}
           />
-          <Route path="/alianzas" element={<Alianzas />} />
+
           {/* Ruta que redirige a la página principal si no hay coincidencias */}
           <Route path="/tallermensual" element={<TallerMensual />} />
           <Route path="/quienes-somos" element={<QuienesSomosPage />} />
           <Route path="/staff-terapéutico" element={<TerapeutasPage />} />
+
           <Route path="/spaprincipal" element={<SpaPrincipal />} />
           <Route path="/nuestra-comunidad" element={<ComunidadYLeadsPage />} />
 

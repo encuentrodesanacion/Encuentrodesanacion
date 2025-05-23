@@ -57,7 +57,7 @@ const ReservaForm = ({
         especialidad: nuevaReserva.especialidad,
         fecha: nuevaReserva.fecha,
         hora: nuevaReserva.hora,
-        clienteId: 0,
+
         precio: nuevaReserva.precio,
       }),
     })

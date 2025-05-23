@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import CartIcon from "../components/CartIcon";
 import { useNavigate } from "react-router-dom";
 import "../styles/tratamientoIntegral.css";
@@ -11,101 +12,148 @@ import Terapeuta5 from "../assets/Terapeuta5.jpg";
 import creadorvirtual from "../assets/creadorvirtual.jpg";
 import Terapeuta8 from "../assets/Terapeuta8.jpg";
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+// Componente para seleccionar fecha y hora antes de confirmar reserva
+interface ReservaConFechaProps {
+  terapia: string;
+  precio: number;
+  onConfirm: (fechaHora: Date) => void;
+}
+
+function ReservaConFecha({ terapia, precio, onConfirm }: ReservaConFechaProps) {
+  const [fechaHora, setFechaHora] = useState<Date | null>(null);
+
+  const handleConfirm = () => {
+    if (!fechaHora) {
+      alert("Por favor, selecciona fecha y hora");
+      return;
+    }
+    onConfirm(fechaHora);
+  };
+
+  return (
+    <div className="reserva-fecha-container p-4 border rounded bg-white shadow-md max-w-xs mx-auto">
+      <p>
+        Reserva: <strong>{terapia}</strong> - ${precio.toLocaleString()} CLP
+      </p>
+      <DatePicker
+        selected={fechaHora}
+        onChange={(date: Date | null) => setFechaHora(date)}
+        showTimeSelect
+        timeFormat="HH:mm"
+        timeIntervals={30}
+        dateFormat="dd/MM/yyyy HH:mm"
+        minDate={new Date()}
+        placeholderText="Selecciona fecha y hora"
+        className="border p-2 w-full mt-2 mb-4"
+      />
+      <button
+        onClick={handleConfirm}
+        className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 w-full"
+      >
+        Confirmar Reserva
+      </button>
+    </div>
+  );
+}
+
+interface ReservaPendiente {
+  terapia: string;
+  precio: number;
+  fechaHora?: Date;
+}
+
 export default function SpaPrincipal() {
   const navigate = useNavigate();
   const { addToCart } = useCart();
+  const [reservaPendiente, setReservaPendiente] =
+    useState<ReservaPendiente | null>(null);
 
   const terapias = [
     {
-      img: Terapeuta1,
+      img: creadorvirtual,
       title: "Canalización Energetica",
-      terapeuta: "Brenda Rivas",
+      terapeuta: "Disponible",
       description:
-        "es una terapia en la cual una persona actúa como un conducto para recibir mensajes de guías espirituales,angeles, maestros ascendidos y seres fallecidos. Es una herramienta poderosa para la conexión con lo divino u el crecimiento personal. Es una forma de recibir orientación espiritual, sanar emocionalmente y obtener claridad sobre diversos aspectos de la vida",
-      opciones: [{ sesiones: 3, precio: 55000 }],
+        "es una terapia en la cual una persona actúa como un conducto para recibir mensajes de guías espirituales...",
+      precio: 55000,
     },
     {
       img: Terapeuta2,
       title: "Limpieza de Espacios",
       terapeuta: "Betsy Bolivar",
       description:
-        "La limpieza energética de espacios es una práctica que busca eliminar energías negativas y restaurar un flujo de energía positivo en un lugar. Se basa en la idea de que las emociones, pensamientos y experiencias acumuladas, incluso liberación de entidades  no contributivas, pueden generar vibraciones bajas que afectan el bienestar de quienes habitan el espacio. Al eliminar bloqueos energéticos, se puede sentir una mayor vitalidad y energía",
-      opciones: [
-        { sesiones: 3, precio: 55000 },
-        { sesiones: 4, precio: 70000 },
-        { sesiones: 5, precio: 85000 },
-      ],
+        "La limpieza energética de espacios es una práctica que busca eliminar energías negativas...",
+      precio: 55000,
     },
     {
       img: Terapeuta3,
       title: "Liberación Memorias Uterinas",
       terapeuta: "Mónica García",
       description:
-        "Es una terapia para conectar con nuestro Centro Creativo, el útero sagrado y liberar patrones de creencias y conductas, miedos, que van pasando de generación en generación por el linaje femenino.  Traerá un nuevo flujo energético promoviendo la armonía, el bienestar y el empoderamiento femenino.",
-      opciones: [{ sesiones: 3, precio: 55000 }],
+        "Es una terapia para conectar con nuestro Centro Creativo, el útero sagrado y liberar patrones...",
+      precio: 55000,
     },
     {
       img: creadorvirtual,
       title: "Constelaciones Familiares",
       terapeuta: "Paulina Villablanca",
       description:
-        "Es una herramienta terapéutica para tratar conflictos personales, familiares y laborales mediante la visualización de representantes que nos permiten tomar decisiones y reconciliarnos con nuestro linaje",
-      opciones: [
-        { sesiones: 3, precio: 55000 },
-        { sesiones: 4, precio: 70000 },
-      ],
+        "Es una herramienta terapéutica para tratar conflictos personales, familiares y laborales...",
+      precio: 55000,
     },
     {
       img: Terapeuta5,
       title: "Purificación y limpieza de energías negativas",
       terapeuta: "Sandra Da Silva",
       description:
-        "Te sientes agotado/a sin mayor razón? ¿Te sientes desmotivado/a y sin propósito? ¿Sufres de dolores de cabeza, dolores físicos y malestar sin causa de enfermedad aparente? ¿Tu entorno es un constante caos, peleas y conflictos? ¿Tus planes no prosperan ni avanzan? ¡Está es la Terapia adecuada para ti, porque nos permite diagnosticar, cortar, limpiar y liberar energías densas relacionadas a la hechiceria, magia blanca o negra, entidades impuestas, envidia, malos pensamientos y deseos, parásitos y larvas astrales!",
-      opciones: [
-        { sesiones: 3, precio: 55000 },
-        { sesiones: 4, precio: 70000 },
-      ],
+        "¿Te sientes agotado/a sin mayor razón?... ¡Está es la Terapia adecuada para ti!",
+      precio: 55000,
     },
     {
       img: creadorvirtual,
       title: "Péndulo Hebreo",
       terapeuta: "Rosa Santimone",
       description:
-        "Es una terapia de armonizacion energética que permite detectar y eliminar energías negativas, restaurando el equilibrio  del cuerpo, diagnosticar  el estado de los Chakras y sistemas  del cuerpo, regenerar y equilibrar su energía, potencia el crecimiento  personal, limpia y armoniza el aura y a través de la cromoterapia otorgar mayores beneficios al consultante",
-      opciones: [
-        { sesiones: 3, precio: 55000 },
-        { sesiones: 4, precio: 70000 },
-      ],
+        "Es una terapia de armonización energética que permite detectar y eliminar energías negativas...",
+      precio: 55000,
     },
     {
       img: Terapeuta8,
       title: "Lectura de Runas",
       terapeuta: "Ana Luisa Solvervicens",
       description:
-        "Cuenta la leyenda que Odín, buscando la sabiduría, se sacrifica y de su sangre brotan las runas. Este oráculo te entrega orientación y respuestas a inquietudes, problemas y todas las consultas que puedas tener.",
-      opciones: [
-        { sesiones: 3, precio: 55000 },
-        { sesiones: 4, precio: 70000 },
-      ],
+        "Cuenta la leyenda que Odín, buscando la sabiduría, se sacrifica y de su sangre brotan las runas...",
+      precio: 55000,
     },
   ];
 
-  const reservarSesion = (
-    terapia: string,
-    sesiones: number,
-    precio: number
-  ) => {
+  // Mostrar formulario para seleccionar fecha y hora
+  const reservar = (terapia: string, precio: number) => {
+    setReservaPendiente({ terapia, precio });
+  };
+
+  // Confirmar reserva y agregar al carrito
+  const confirmarReserva = (fechaHora: Date) => {
+    if (!reservaPendiente) return;
+
     const reserva = {
       servicio: "Tratamiento Integral",
-      especialidad: terapia,
-      fecha: "",
-      hora: "",
-      precio,
-      sesiones,
+      especialidad: reservaPendiente.terapia,
+      fecha: fechaHora.toISOString().split("T")[0],
+      hora: fechaHora.toTimeString().split(" ")[0],
+      precio: reservaPendiente.precio,
     };
 
     addToCart(reserva);
-    alert(`Reserva agregada: ${sesiones} sesiones de ${terapia}`);
+
+    alert(
+      `Reserva agregada: ${reserva.especialidad} el ${reserva.fecha} a las ${reserva.hora}`
+    );
+
+    setReservaPendiente(null);
   };
 
   return (
@@ -141,25 +189,26 @@ export default function SpaPrincipal() {
                   </div>
                 </div>
                 <div className="flip-back">
-                  <h3 className="mb-2 font-bold">{t.title}</h3>
+                  <h3 className="mb-2 font-bold">
+                    {t.terapeuta !== "Disponible" && (
+                      <span className="text-sm text-gray-600 block">
+                        {t.terapeuta}
+                      </span>
+                    )}
+                    {t.title}
+                  </h3>
                   <p className="mb-2">{t.description}</p>
                   <form
                     className="w-full px-2"
                     onSubmit={(e) => e.preventDefault()}
                   >
-                    {t.opciones.map((op, j) => (
-                      <button
-                        key={j}
-                        type="button"
-                        onClick={() =>
-                          reservarSesion(t.title, op.sesiones, op.precio)
-                        }
-                        className="w-full mb-2 px-2 py-1 border rounded bg-pink-600 text-white hover:bg-pink-700"
-                      >
-                        {op.sesiones} sesiones (${op.precio.toLocaleString()}{" "}
-                        CLP)
-                      </button>
-                    ))}
+                    <button
+                      type="button"
+                      onClick={() => reservar(t.title, t.precio)}
+                      className="w-full mt-4 px-2 py-2 border rounded bg-pink-600 text-white hover:bg-pink-700"
+                    >
+                      Toma de hora
+                    </button>
                   </form>
                 </div>
               </div>
@@ -167,6 +216,24 @@ export default function SpaPrincipal() {
           </div>
         ))}
       </div>
+
+      {reservaPendiente && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded shadow-lg max-w-md w-full relative">
+            <button
+              onClick={() => setReservaPendiente(null)}
+              className="absolute top-2 right-2 text-gray-600 hover:text-gray-900 font-bold"
+            >
+              X
+            </button>
+            <ReservaConFecha
+              terapia={reservaPendiente.terapia}
+              precio={reservaPendiente.precio}
+              onConfirm={confirmarReserva}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

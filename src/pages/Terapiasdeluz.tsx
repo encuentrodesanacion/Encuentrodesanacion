@@ -32,7 +32,7 @@ const imagenes = [
     descripcion:
       "En esta formación aprenderás a conectar con tu intuición para ir descubriendo el lenguaje mágico del Tarot, preparar tu espacio y consagrar tus cartas. podras interpretar los símbolos y colores de los arcanos y utilizar tu tarot como una fuente inagotable de información que sera tu guía tanto de desarrollo personal como también  una forma de meditación , aprenderas diferentes tipos de tiradas que te servirán para orientar a otros y comenzar este hermoso camino espiritual",
     link: "#",
-    terapeuta: "Jacqueline Zepeda",
+    terapeuta: "Niza",
   },
   {
     src: terapeuta6,

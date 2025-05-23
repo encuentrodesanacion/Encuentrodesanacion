@@ -1,5 +1,5 @@
-import { DataTypes } from "sequelize";
-import sequelize from "../sequelize.js";
+const { DataTypes } = require("sequelize");
+const sequelize = require("../sequelize");
 
 const Terapeuta = sequelize.define("Terapeuta", {
   nombre: {
@@ -16,4 +16,4 @@ const Terapeuta = sequelize.define("Terapeuta", {
   },
 });
 
-export default Terapeuta;
+module.exports = Terapeuta;

@@ -18,6 +18,8 @@ const ReservaHora = forwardRef<HTMLDivElement, ReservaHoraProps>(
     const [hora, setHora] = useState("");
     const [nombre, setNombre] = useState("");
     const [correo, setCorreo] = useState("");
+    const [precio, setPrecio] = useState<number>(0);
+    const [sesiones, setSesiones] = useState<number>(1);
 
     const { addToCart } = useCart(); // 👈 Traemos el método del carrito
 
@@ -65,6 +67,8 @@ const ReservaHora = forwardRef<HTMLDivElement, ReservaHoraProps>(
         hora,
         nombre,
         correo,
+        precio,
+        sesiones,
       };
 
       // 👇 Lo añadimos al carrito

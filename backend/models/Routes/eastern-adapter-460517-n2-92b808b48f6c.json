@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "eastern-adapter-460517-n2",
+  "private_key_id": "92b808b48f6cd5e2d8e942b5aed9ddec22483daf",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCh7DZHO6yKK0O5\nlflJ6E9J0hEdw/4SCVe4P7zUikEBsmE0J+eeSBsWPoZdjm7j+H+5edKa4nyllSO5\nkOjxiCmdi8MFPrWvhQZX84Wq5TgFkqtJ7m2GSEagS/H0V5PDRK4/1nOyKdunpO+r\nB2a+mXw47DkexnkmvPmu4MEU0oqLnQbtTPs/nMvZ7aNcEdX9unBOY2HH/84G2Ysx\nQfvZFAS2m05WNL3litkq03cxc40fMCOX0gjgzYOVYOAWElVFDEB66/yUfYHcXkpc\nCZ1L/K6rJAok2GWyVWKfkE/Vb7rMLOhMzGTpw6OKcGV7jTfbyhxzlBEfDNMjjP2b\nhV5DCsKlAgMBAAECggEAArAAu6BwLe/nZRxp4ZHnRP6lVZTj8ekxSUfXisCLsStE\nhUDXTY99UZpykPl0+jgs6Idu2S7Cql3mFKWk1CNyK2D/OOZQTiw7TXjngk1hJ2iG\nisjYDQdEktMH3koY1AAfE0SsMWwT7v2kE7bg++9gujIjhZD+QEgZLc+hrMaM0aHg\nEWAFtg3daaET6vq+8uJ8gQCZsYybcSbaEnGwKskupfYA4/nQFyGOcj6F1MsVw2YE\ng7rH5X/uImY/9ccoXfTGAOaeMC5w7PWSApktricuNlMzzn1oF3f1torkYMs7ItlB\nrvm+hTNBdDqUwWxOYyhfeV2nHLQw4v6Empi2GgaKoQKBgQDRqgczntmnkv2rAWq3\n5Xq++iASeTdUhaUTrjqEa9U8h3ZYiTuqvNSPpEVNmuVf/7EiBhV/YO+pbL+Iixy6\nT7dRYsgImZZ5eaFkdrKHO+PED1pLRSagHxWWJwULfArUYudZH17ib+8G2DdTRyJB\nDLF3KIO0s2CGQY3Y12aQ9uURxQKBgQDFtSjt6bPLBc6ZM3zUoqYYahEicE7rWi+H\n25OXFlHNRO/skXDZ+4yr1JSd5LXv0Zat2EV65pP66YZ8i3YSQMlhyRf8+HWv+iBm\nD+TRYYBxSQZCCQG2TpMCqMQBLB9uEhm31orezecM9f61W+IJO8QQ2Zih/+4PD3D4\nYEIs2hZbYQKBgQDKty+RXIQrPrbfEVaiiVEdt28tDWBO64zJM4rGoBAjHwJw5fb3\nxO1sGLMdLqeaIvmb4PAGIa53THr/xSk4hnzDRtQLZJyVxOEj5pQEpwY4eXOfFTQc\nWxGfBQkeqoc6BIqUo/00yG7+Wi1b6ooXBPPNNzHolAq+pEFGqDU18lFW1QKBgGji\nwuP0p719Ry1fc0obP6KUIqLykeup3K1mf9YXsS4E9IO8ZPI/0VEXZgCd5SdlOVrg\n8XtR+A+U9BP+qJTmae/Gj0NVTJofSDDdHbc20r1G0FsYDCB7buJqRhGZJtNuJtaw\nqtuowHrPxmDQbgoX+tw1lBPdgp3aw0QBTRoeWN4BAoGBAJyXEeHKTyBYyry+oT6j\n5nu+0ObVyPXevUBUepdc7fd3H4obA25p3SzNvEyppZpYvQkyk51m82QXnwyle0Ie\n2N5yKvl/neWKqBdekuIrBASMRGk4bGj9kcQO7TFIf9uxyO0ffaLZ41CRPRTX2J1E\nc5iEL6OPbuTS5PdVtLNP8fw0\n-----END PRIVATE KEY-----\n",
+  "client_email": "backend-calendar-service@eastern-adapter-460517-n2.iam.gserviceaccount.com",
+  "client_id": "117259259419064613299",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/backend-calendar-service%40eastern-adapter-460517-n2.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
