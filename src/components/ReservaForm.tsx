@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useCart, Reserva } from "../pages/CartContext";
 
+// Define las props que este componente espera recibir de su padre
 interface ReservaFormProps {
-  servicio: string;
-  terapeuta: string;
-  horasDisponibles?: string[]; // opcional
+  servicio: string; // Ahora es obligatorio por el tipo Reserva
+  terapeuta: string; // El nombre del terapeuta, que se usará como especialidad
+  horasDisponibles?: string[]; // Opcional
 }
 
 const ReservaForm = ({
@@ -14,12 +15,14 @@ const ReservaForm = ({
 }: ReservaFormProps) => {
   const { addToCart } = useCart();
 
+  // Estado local para los campos del formulario
   const [form, setForm] = useState({
     fecha: "",
     hora: "",
-    precio: 30000,
+    precio: 30000, // Precio inicial fijo
   });
 
+  // Manejador para actualizar el estado del formulario
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -27,26 +30,36 @@ const ReservaForm = ({
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Manejador al enviar el formulario (agregar al carrito y enviar a la API)
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Crea el objeto de la nueva reserva a partir del estado del formulario y las props
     const nuevaReserva: Reserva = {
-      servicio,
-      especialidad: terapeuta,
+      servicio: servicio, // Toma el valor de la prop 'servicio'
+      especialidad: terapeuta, // Toma el valor de la prop 'terapeuta'
       fecha: form.fecha,
       hora: form.hora,
-      precio: form.precio,
+      precio: form.precio, // Toma el valor de 'precio' del estado local
     };
 
+    // --- ¡AÑADE ESTE CONSOLE.LOG CRUCIAL PARA DEPURACIÓN! ---
+    // Esto mostrará en la consola de tu navegador el objeto exacto que se intenta añadir.
+    console.log("Objeto Reserva a añadir al carrito:", nuevaReserva);
+    // --- FIN CONSOLE.LOG DEPURACIÓN ---
+
+    // Llama a la función addToCart del contexto para agregar la reserva
     addToCart(nuevaReserva);
     alert("Reserva agregada al carrito");
 
+    // Reinicia el formulario después de agregar la reserva
     setForm({
       fecha: "",
       hora: "",
       precio: 30000,
     });
 
+    // Envía la reserva a tu API (esto es una notificación, no el pago)
     fetch("http://localhost:3000/api/enviar-reserva", {
       method: "POST",
       headers: {
@@ -57,7 +70,6 @@ const ReservaForm = ({
         especialidad: nuevaReserva.especialidad,
         fecha: nuevaReserva.fecha,
         hora: nuevaReserva.hora,
-
         precio: nuevaReserva.precio,
       }),
     })

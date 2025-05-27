@@ -1,24 +1,15 @@
 import React, { useState } from "react";
-import CartIcon from "../components/CartIcon";
 import { useNavigate } from "react-router-dom";
-import "../styles/tratamientoIntegral.css";
-import { useCart } from "./CartContext";
-
-import Terapeuta1 from "../assets/Terapeuta1.jpg";
-import Terapeuta2 from "../assets/Terapeuta2.jpg";
-import Terapeuta3 from "../assets/Terapeuta3.jpg";
-import Terapeuta4 from "../assets/Terapeuta4.jpg";
-import Terapeuta5 from "../assets/Terapeuta5.jpg";
-import creadorvirtual from "../assets/creadorvirtual.jpg";
-import Terapeuta8 from "../assets/Terapeuta8.jpg";
+import "../styles/tratamientoIntegral.css"; // Asegúrate que esta ruta sea correcta
+import { useCart, Reserva } from "./CartContext"; // Importa 'Reserva' si aún no lo haces
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 // Componente para seleccionar fecha y hora antes de confirmar reserva
 interface ReservaConFechaProps {
-  terapia: string;
-  precio: number;
+  terapia: string; // Nombre de la terapia seleccionada
+  precio: number; // Precio de la terapia seleccionada
   onConfirm: (fechaHora: Date) => void;
 }
 
@@ -59,10 +50,11 @@ function ReservaConFecha({ terapia, precio, onConfirm }: ReservaConFechaProps) {
   );
 }
 
+// Interfaz para la reserva pendiente (lo que se guarda antes de elegir fecha/hora)
 interface ReservaPendiente {
   terapia: string;
   precio: number;
-  fechaHora?: Date;
+  fechaHora?: Date; // Opcional, ya que se agrega más tarde
 }
 
 export default function SpaPrincipal() {
@@ -71,96 +63,124 @@ export default function SpaPrincipal() {
   const [reservaPendiente, setReservaPendiente] =
     useState<ReservaPendiente | null>(null);
 
+  // Tu lista de terapias
   const terapias = [
     {
-      img: creadorvirtual,
+      img: "../assets/creadorvirtual.jpg", // Asegúrate que estas rutas de imagen sean correctas
       title: "Canalización Energetica",
       terapeuta: "Disponible",
       description:
         "es una terapia en la cual una persona actúa como un conducto para recibir mensajes de guías espirituales...",
-      precio: 55000,
+      precio: 55000, // Precio numérico
     },
     {
-      img: Terapeuta2,
+      img: "../assets/Terapeuta2.jpg",
       title: "Limpieza de Espacios",
       terapeuta: "Betsy Bolivar",
       description:
         "La limpieza energética de espacios es una práctica que busca eliminar energías negativas...",
-      precio: 55000,
+      precio: 55000, // Precio numérico
     },
     {
-      img: Terapeuta3,
+      img: "../assets/Terapeuta3.jpg",
       title: "Liberación Memorias Uterinas",
       terapeuta: "Mónica García",
       description:
         "Es una terapia para conectar con nuestro Centro Creativo, el útero sagrado y liberar patrones...",
-      precio: 55000,
+      precio: 55000, // Precio numérico
     },
     {
-      img: creadorvirtual,
+      img: "../assets/creadorvirtual.jpg", // Revisa si creadorvirtual es el mismo que el anterior
       title: "Constelaciones Familiares",
       terapeuta: "Paulina Villablanca",
       description:
         "Es una herramienta terapéutica para tratar conflictos personales, familiares y laborales...",
-      precio: 55000,
+      precio: 55000, // Precio numérico
     },
     {
-      img: Terapeuta5,
+      img: "../assets/Terapeuta5.jpg",
       title: "Purificación y limpieza de energías negativas",
       terapeuta: "Sandra Da Silva",
       description:
         "¿Te sientes agotado/a sin mayor razón?... ¡Está es la Terapia adecuada para ti!",
-      precio: 55000,
+      precio: 55000, // Precio numérico
     },
     {
-      img: creadorvirtual,
+      img: "../assets/creadorvirtual.jpg",
       title: "Péndulo Hebreo",
       terapeuta: "Rosa Santimone",
       description:
         "Es una terapia de armonización energética que permite detectar y eliminar energías negativas...",
-      precio: 55000,
+      precio: 55000, // Precio numérico
     },
     {
-      img: Terapeuta8,
+      img: "../assets/Terapeuta8.jpg",
       title: "Lectura de Runas",
       terapeuta: "Ana Luisa Solvervicens",
       description:
         "Cuenta la leyenda que Odín, buscando la sabiduría, se sacrifica y de su sangre brotan las runas...",
-      precio: 55000,
+      precio: 55000, // Precio numérico
     },
   ];
 
   // Mostrar formulario para seleccionar fecha y hora
-  const reservar = (terapia: string, precio: number) => {
-    setReservaPendiente({ terapia, precio });
+  const reservar = (terapiaTitle: string, terapiaPrecio: number) => {
+    // Asegúrate de que precio sea un número válido antes de guardar
+    if (
+      typeof terapiaPrecio !== "number" ||
+      isNaN(terapiaPrecio) ||
+      terapiaPrecio === null ||
+      terapiaPrecio < 0
+    ) {
+      console.error("Error: Precio de la terapia inválido al reservar.");
+      alert("No se puede reservar: el precio es inválido.");
+      return;
+    }
+    setReservaPendiente({ terapia: terapiaTitle, precio: terapiaPrecio });
   };
 
   // Confirmar reserva y agregar al carrito
   const confirmarReserva = (fechaHora: Date) => {
     if (!reservaPendiente) return;
 
-    const reserva = {
-      servicio: "Tratamiento Integral",
-      especialidad: reservaPendiente.terapia,
+    // Construye el objeto 'reserva' con los tipos correctos y valores garantizados
+    const reserva: Reserva = {
+      servicio: reservaPendiente.terapia, // <-- ¡AHORA TOMA EL NOMBRE REAL DE LA TERAPIA!
+      especialidad: reservaPendiente.terapia, // Podrías usar el mismo título como especialidad, o ajustarlo si tienes una especialidad real
       fecha: fechaHora.toISOString().split("T")[0],
       hora: fechaHora.toTimeString().split(" ")[0],
-      precio: reservaPendiente.precio,
+      precio: reservaPendiente.precio, // <-- ¡Precio ya verificado!
+      // Añade cualquier otra propiedad obligatoria de 'Reserva' si no está aquí, como 'nombre', 'correo', etc.
+      // O, asegúrate de que el modelo de backend permita null para ellas.
+      // Ejemplo si son obligatorias pero no vienen de aquí:
+      // nombre: "Cliente General",
+      // correo: "cliente@ejemplo.com",
     };
 
+    // --- CONSOLE.LOG PARA DEPURACIÓN ---
+    console.log(
+      "Objeto Reserva FINAL a añadir al carrito desde SpaPrincipal:",
+      reserva
+    );
+    // --- FIN CONSOLE.LOG ---
+
+    // Añade al carrito
     addToCart(reserva);
 
     alert(
-      `Reserva agregada: ${reserva.especialidad} el ${reserva.fecha} a las ${reserva.hora}`
+      `Reserva agregada: ${reserva.servicio} el ${reserva.fecha} a las ${reserva.hora}`
     );
 
-    setReservaPendiente(null);
+    setReservaPendiente(null); // Cierra el modal de fecha/hora
   };
 
   return (
     <div className="min-h-screen bg-white pt-24 px-6">
+      {/* <header> y <CartIcon> u otros elementos de layout */}
       <header className="fixed top-0 left-0 w-full bg-white shadow z-50 flex justify-between items-center px-6 py-4">
         <h1 className="text-xl font-semibold text-gray-800">Spa Principal</h1>
-        <CartIcon />
+        {/* Asegúrate de que CartIcon se importe correctamente */}
+        {/* <CartIcon /> */}
       </header>
 
       <button
@@ -204,7 +224,7 @@ export default function SpaPrincipal() {
                   >
                     <button
                       type="button"
-                      onClick={() => reservar(t.title, t.precio)}
+                      onClick={() => reservar(t.title, t.precio)} // Pasar título y precio
                       className="w-full mt-4 px-2 py-2 border rounded bg-pink-600 text-white hover:bg-pink-700"
                     >
                       Toma de hora
@@ -217,6 +237,7 @@ export default function SpaPrincipal() {
         ))}
       </div>
 
+      {/* Modal para seleccionar fecha y hora */}
       {reservaPendiente && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded shadow-lg max-w-md w-full relative">

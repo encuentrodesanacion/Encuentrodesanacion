@@ -1,11 +1,11 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
 export interface Reserva {
-  servicio?: string;
+  servicio: string; // <-- ¡AHORA ES OBLIGATORIO!
   especialidad?: string;
   fecha?: string;
   hora?: string;
-  precio?: number;
+  precio: number; // <-- Sigue siendo obligatorio
   sesiones?: number;
   terapeutaId?: string;
   clienteId?: string;
@@ -37,7 +37,31 @@ interface CartProviderProps {
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = useState<Reserva[]>([]);
 
-  const addToCart = (item: Reserva) => setCart((prev) => [...prev, item]);
+  const addToCart = (item: Reserva) => {
+    // Validar servicio: debe ser un string no vacío.
+    if (typeof item.servicio !== "string" || item.servicio.trim() === "") {
+      console.error(
+        "Error: El 'servicio' del ítem debe ser una cadena de texto no vacía."
+      );
+      // Puedes lanzar un error aquí o no añadir el ítem
+      return;
+    }
+
+    // Validar precio: debe ser un número válido y no nulo/indefinido.
+    if (
+      typeof item.precio !== "number" ||
+      isNaN(item.precio) ||
+      item.precio === null ||
+      item.precio === undefined
+    ) {
+      console.error("Error: El 'precio' del ítem debe ser un número válido.");
+      // Puedes lanzar un error aquí o no añadir el ítem
+      return;
+    }
+
+    setCart((prev) => [...prev, item]);
+  };
+
   const removeFromCart = (index: number) =>
     setCart((prev) => prev.filter((_, i) => i !== index));
   const clearCart = () => setCart([]);

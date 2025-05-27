@@ -1,21 +1,33 @@
-import CartIcon from "../components/CartIcon";
+import React from "react"; // Asegúrate de importar React
 import { useNavigate } from "react-router-dom";
-import "../styles/tratamientoIntegral.css";
-import { useCart } from "./CartContext";
+import "../styles/tratamientoIntegral.css"; // Asegúrate que esta ruta sea correcta
+import { useCart, Reserva } from "./CartContext"; // Importa 'Reserva' si no lo haces
 
+// Asegúrate de que las rutas de las imágenes sean correctas
 import Terapeuta1 from "../assets/Terapeuta1.jpg";
 import Terapeuta2 from "../assets/Terapeuta2.jpg";
 import Terapeuta3 from "../assets/Terapeuta3.jpg";
 import Terapeuta4 from "../assets/Terapeuta4.jpg";
 import Terapeuta5 from "../assets/Terapeuta5.jpg";
 import Terapeuta6 from "../assets/Terapeuta6.jpg";
-import Terapeuta7 from "../assets/Terapeuta7.jpg";
+
+// --- ¡Importa CartIcon aquí! ---
+import CartIcon from "../components/CartIcon";
+// --- Fin Importación CartIcon ---
+
+interface TerapiaItem {
+  img: string;
+  title: string;
+  terapeuta: string;
+  description: string;
+  opciones: { sesiones: number; precio: number }[];
+}
 
 export default function TratamientoHolistico() {
   const navigate = useNavigate();
   const { addToCart } = useCart();
 
-  const terapias = [
+  const terapias: TerapiaItem[] = [
     {
       img: Terapeuta1,
       title: "Canalización Energetica",
@@ -60,7 +72,7 @@ export default function TratamientoHolistico() {
       title: "Terapia de Respuesta Espiritual (Con Conexión Angelical)",
       terapeuta: "Sandra Da Silva",
       description:
-        "Esta maravillosa Técnica de Sanación te permitirá una conexión intima con tu Ser, nos ayudará a realizar una investigación para conocer todo aquello que quedo grabado en tu Alma y en tu mente subconsciente, que impide que evoluciones en esta vida y que puedas soltar que le pesa. Puedes solicitar este Tratamiento si quieres: Limpiar sentimientos, actitudes y emociones toxicas. (Ansiedad, Depresión, etc.) Limpiar patrones emocionales familiares, de pareja, laborales. Remover bloqueos de cualquier índole, incluyendo energías de bajo astral  (hechicería, magia negra, envidia, etc.). Re-conectarás con tu esencia para que puedas iniciar cambios positivos en tu vida.",
+        "Esta maravillosa Técnica de Sanación te permitirá una conexión intima con tu Ser, nos ayudará a realizar una investigación para conocer todo aquello que quedo grabado en tu Alma y en tu mente subconsciente, que impide que evoluciones en esta vida y que puedas soltar que le pesa. Puedes solicitar este Tratamiento si quieres: Limpiar sentimientos, actitudes y emociones toxicas. (Ansiedad, Depresión, etc.) Limpiar patrones emocionales familiares, de pareja, laborales. Remover bloqueos de cualquier índole, incluyendo energías de bajo astral  (hechicería, magia negra, envidia, etc.). Re-conectarás con tu esencia para que puedas iniciar cambios positivos en tu vida.",
       opciones: [
         { sesiones: 3, precio: 55000 },
         { sesiones: 4, precio: 70000 },
@@ -80,21 +92,47 @@ export default function TratamientoHolistico() {
   ];
 
   const reservarSesion = (
-    terapia: string,
+    terapiaTitle: string, // Recibe el título de la terapia
     sesiones: number,
     precio: number
   ) => {
-    const reserva = {
-      servicio: "Tratamiento Integral",
-      especialidad: terapia,
-      fecha: "",
+    // Validaciones defensivas antes de añadir al carrito
+    if (
+      !terapiaTitle ||
+      typeof terapiaTitle !== "string" ||
+      terapiaTitle.trim() === ""
+    ) {
+      alert("Error: El nombre del servicio no es válido.");
+      console.error("Servicio inválido:", terapiaTitle);
+      return;
+    }
+    if (typeof precio !== "number" || isNaN(precio) || precio <= 0) {
+      alert("Error: El precio no es válido o es cero.");
+      console.error("Precio inválido:", precio);
+      return;
+    }
+
+    const reserva: Reserva = {
+      // Tipamos el objeto explícitamente
+      servicio: terapiaTitle, // <-- ¡CORREGIDO! Ahora toma el título real de la terapia
+      especialidad: terapiaTitle, // Puedes usar el mismo título como especialidad, o ajustarlo
+      fecha: "", // Estos campos están vacíos, asegúrate de que el modelo en backend los permita nulos
       hora: "",
-      precio,
-      sesiones,
+      precio: precio,
+      sesiones: sesiones,
+      // Si el modelo de Reserva en el backend tiene otros campos obligatorios (nombre, correo, etc.),
+      // debes añadirlos aquí con valores apropiados (ej. valores por defecto, o desde un formulario).
     };
 
+    // --- CONSOLE.LOG PARA DEPURACIÓN ---
+    console.log(
+      "Objeto Reserva a añadir al carrito desde TratamientoHolistico:",
+      reserva
+    );
+    // --- FIN CONSOLE.LOG ---
+
     addToCart(reserva);
-    alert(`Reserva agregada: ${sesiones} sesiones de ${terapia}`);
+    alert(`Reserva agregada: ${sesiones} sesiones de ${terapiaTitle}`);
   };
 
   return (
@@ -103,7 +141,7 @@ export default function TratamientoHolistico() {
         <h1 className="text-xl font-semibold text-gray-800">
           Tratamiento Integral
         </h1>
-        <CartIcon />
+        <CartIcon /> {/* <-- ¡Descomentado! Ahora debería aparecer de nuevo. */}
       </header>
 
       <button
@@ -143,8 +181,8 @@ export default function TratamientoHolistico() {
                       <button
                         key={j}
                         type="button"
-                        onClick={() =>
-                          reservarSesion(t.title, op.sesiones, op.precio)
+                        onClick={
+                          () => reservarSesion(t.title, op.sesiones, op.precio) // Pasa el título, sesiones y precio de la opción
                         }
                         className="w-full mb-2 px-2 py-1 border rounded bg-pink-600 text-white hover:bg-pink-700"
                       >

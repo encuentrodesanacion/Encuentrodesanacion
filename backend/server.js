@@ -1,140 +1,71 @@
-require("dotenv").config();
-console.log("GOOGLE_CLIENT_ID:", process.env.GOOGLE_CLIENT_ID);
+// backend/server.js
+
+// 1. Cargar variables de entorno al inicio y depurar su carga
+const dotenv = require("dotenv");
+const result = dotenv.config();
+
+if (result.error) {
+  console.error("Error al cargar .env:", result.error);
+} else {
+  console.log(".env cargado correctamente. Variables cargadas:", result.parsed);
+}
 
 const express = require("express");
-const nodemailer = require("nodemailer");
-const bodyParser = require("body-parser");
-const confirmarTransaccionRoute = require("./routes/webpay-confirmacion");
 const cors = require("cors");
-const { WebpayPlus, Environment, Options } = require("transbank-sdk");
-const crearTransaccionRoute = require("./routes/crear-transaccion");
-const sequelize = require("./sequelize");
-const Terapeuta = require("./models/Terapeuta");
-const Reserva = require("./models/Reserva");
-const { autenticarToken } = require("./middlewares/auth");
-const transbankRoutes = require("./models/Routes/webpay");
-const googleAuthRoutes = require("./models/Routes/googleAuth");
-const { google } = require("googleapis");
 const path = require("path");
-
-const calendar = google.calendar("v3");
-
-// Función para autenticar con cuenta de servicio
-async function authorize() {
-  const auth = new google.auth.GoogleAuth({
-    keyFile: path.join(
-      __dirname,
-      "models",
-      "Routes",
-      "eastern-adapter-460517-n2-92b808b48f6c.json"
-    ),
-    scopes: ["https://www.googleapis.com/auth/calendar"],
-  });
-  return await auth.getClient();
-}
-
-// Función para crear evento en Google Calendar
-async function crearEventoReserva(fechaInicioISO, fechaFinISO, resumen) {
-  const authClient = await authorize();
-  const calendarId = process.env.GOOGLE_CALENDAR_ID;
-
-  const evento = {
-    summary: resumen,
-    start: { dateTime: fechaInicioISO },
-    end: { dateTime: fechaFinISO },
-  };
-
-  const respuesta = await calendar.events.insert({
-    auth: authClient,
-    calendarId,
-    requestBody: evento,
-  });
-
-  return respuesta.data;
-}
 
 const app = express();
 
-// Middlewares globales
-app.use(cors());
-app.use(bodyParser.json());
-app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// --- Importaciones de Modelos de Base de Datos ---
+// Asegúrate de que estos paths sean correctos según la ubicación de tus archivos.
+const db = require("./models"); // Asumo que este archivo inicializa Sequelize y los modelos
+const Terapeuta = require("./models/Terapeuta"); // Asumo que estos modelos se usan en otros controladores
+const Reserva = require("./models/Reserva");
+const TemporalReserva = require("./models/TemporalReserva"); // Importa TemporalReserva también
 
-// CORS específico para frontend
+// --- Importaciones de Rutas ---
+// ¡Importa el archivo de rutas de Webpay!
+const webpayRoutes = require("./routes/webpay.routes");
+
+// Si tienes otras rutas como las de Google Auth, impórtalas aquí:
+// **IMPORTANTE:** Revisa la ruta de googleAuth.
+const googleAuthRoutes = require("./models/Routes/googleAuth"); // Asumo que esta ruta es correcta
+
+// --- Middlewares Globales ---
+
+// Configuración de CORS: Permite a tu frontend (localhost:5173) hacer peticiones al backend.
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173"], // O el dominio de tu frontend en producción
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
-// Rutas
-app.use("/api", transbankRoutes);
-app.use("/api", require("./routes/enviarReserva"));
-app.use("/", googleAuthRoutes);
-app.use("/api/crear-transaccion", crearTransaccionRoute);
-app.use("/api", confirmarTransaccionRoute);
+// ¡CRUCIAL! Middlewares para parsear el cuerpo de las solicitudes JSON y URL-encoded.
+// Deben ir ANTES de cualquier ruta que necesite leer req.body (como las de Webpay).
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Confirmación de pago y creación de reserva
-const transaction = new WebpayPlus.Transaction(
-  new Options(
-    process.env.TBK_COMMERCE_CODE,
-    process.env.TBK_API_KEY_ID || "default",
-    process.env.TBK_API_KEY,
-    Environment.Integration
-  )
-);
+// --- Rutas de la API ---
 
-app.post("/api/webpay-confirmacion", async (req, res) => {
-  const { token, reservaInfo } = req.body;
+// Montar el router de Webpay bajo el prefijo /api/webpay.
+// Esto hará que:
+// POST /api/webpay                 -> webpayRoutes.post('/')
+// POST /api/webpay/confirmacion    -> webpayRoutes.post('/confirmacion')
+app.use("/api/webpay", webpayRoutes);
 
-  if (!token) return res.status(400).json({ mensaje: "Falta token" });
+// Montar otras rutas (ej. Google Auth)
+app.use("/", googleAuthRoutes); // Revisa si esta ruta base es la adecuada para googleAuth
 
-  try {
-    const respuesta = await transaction.commit(token);
-
-    if (respuesta.status === "AUTHORIZED") {
-      let evento = null;
-      if (reservaInfo) {
-        evento = await crearEventoReserva(
-          reservaInfo.fechaInicio,
-          reservaInfo.fechaFin,
-          `Reserva de ${reservaInfo.servicio}`
-        );
-
-        await Reserva.create({
-          usuarioId: reservaInfo.usuarioId,
-          servicio: reservaInfo.servicio,
-          fechaInicio: reservaInfo.fechaInicio,
-          fechaFin: reservaInfo.fechaFin,
-          googleEventId: evento.id,
-          estado: "reservado",
-        });
-      }
-
-      return res.status(200).json({
-        mensaje: "Pago exitoso y reserva creada",
-        datosPago: respuesta,
-        token_ws: token,
-        evento,
-      });
-    } else {
-      return res
-        .status(400)
-        .json({ mensaje: "Pago no autorizado", datosPago: respuesta });
-    }
-  } catch (error) {
-    console.error("Error al confirmar transacción:", error);
-    return res
-      .status(500)
-      .json({ mensaje: "Error al confirmar el pago", error: error.message });
-  }
+// Ruta para recibir reserva desde frontend (ejemplo, si no la manejas con un controlador)
+app.post("/api/enviar-reserva", (req, res) => {
+  console.log("Reserva recibida:", req.body);
+  res.status(200).send("Reserva recibida correctamente");
 });
 
-// Crear reserva manual (requiere autenticación)
-app.post("/api/reservar", autenticarToken, async (req, res) => {
+// Crear reserva autenticada (ejemplo de ruta directa)
+app.post("/api/reservar", async (req, res) => {
   try {
     const { fechaInicio, fechaFin, usuarioId, servicio } = req.body;
 
@@ -148,24 +79,15 @@ app.post("/api/reservar", autenticarToken, async (req, res) => {
         .json({ mensaje: "Ese horario ya está reservado." });
     }
 
-    const evento = await crearEventoReserva(
-      fechaInicio,
-      fechaFin,
-      `Reserva de ${servicio}`
-    );
-
     await Reserva.create({
       usuarioId,
       servicio,
       fechaInicio,
       fechaFin,
-      googleEventId: evento.id,
       estado: "reservado",
     });
 
-    res
-      .status(200)
-      .json({ mensaje: "Reserva creada y hora bloqueada", evento });
+    res.status(200).json({ mensaje: "Reserva creada y hora bloqueada" });
   } catch (error) {
     console.error("Error creando reserva:", error);
     res
@@ -174,50 +96,29 @@ app.post("/api/reservar", autenticarToken, async (req, res) => {
   }
 });
 
-// REST: Terapeutas y Reservas
+// Obtener terapeutas
 app.get("/api/terapeutas", async (req, res) => {
   try {
     const terapeutas = await Terapeuta.findAll();
     res.json(terapeutas);
   } catch (error) {
+    console.error("Error al obtener los terapeutas:", error);
     res.status(500).json({ error: "Error al obtener los terapeutas" });
   }
 });
 
+// Obtener reservas
 app.get("/api/reservas", async (req, res) => {
   try {
     const reservas = await Reserva.findAll();
     res.json(reservas);
   } catch (error) {
+    console.error("Error al obtener las reservas:", error);
     res.status(500).json({ error: "Error al obtener las reservas" });
   }
 });
 
-// Insertar terapeutas iniciales (solo una vez)
-Terapeuta.bulkCreate(
-  [
-    {
-      nombre: "Camila Sanación",
-      email: "camila@example.com",
-      servicio: "Reiki",
-    },
-    {
-      nombre: "Juan Energía",
-      email: "juan@example.com",
-      servicio: "Sanación cuántica",
-    },
-    {
-      nombre: "Lucía Luz",
-      email: "lucia@example.com",
-      servicio: "Terapia de luz",
-    },
-  ],
-  { ignoreDuplicates: true }
-)
-  .then(() => console.log("Terapeutas insertados."))
-  .catch(console.error);
-
-// Crear nuevo terapeuta
+// Crear terapeuta
 app.post("/api/terapeutas", async (req, res) => {
   const { nombre, email, servicio } = req.body;
   try {
@@ -229,11 +130,17 @@ app.post("/api/terapeutas", async (req, res) => {
   }
 });
 
-// Sincronizar base de datos y lanzar servidor
-sequelize.sync().then(() => {
-  console.log("Base de datos actualizada correctamente");
-  const PORT = process.env.PORT || 3000;
-  app.listen(PORT, () => {
-    console.log(`Servidor backend corriendo en http://localhost:${PORT}`);
+// --- Sincronizar base de datos e iniciar servidor ---
+// Usa db.sequelize.sync({ alter: true }) para actualizar la DB sin borrar datos.
+db.sequelize
+  .sync({ alter: true })
+  .then(() => {
+    console.log("Base de datos actualizada correctamente");
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () =>
+      console.log(`Servidor escuchando en puerto ${PORT}`)
+    );
+  })
+  .catch((err) => {
+    console.error("Error al sincronizar la base de datos:", err);
   });
-});

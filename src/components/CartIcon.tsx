@@ -4,7 +4,7 @@ import { ShoppingCart } from "lucide-react";
 import type { Reserva } from "../pages/CartContext";
 
 const CartIcon = () => {
-  const { cart, removeFromCart, clearCart } = useCart(); // 🆕 Asegúrate de tener clearCart en tu contexto
+  const { cart, removeFromCart, clearCart } = useCart(); // ¡clearCart aún lo necesitamos aquí para desestructurar!
   const [open, setOpen] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -27,46 +27,30 @@ const CartIcon = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [open]);
 
-  const notifyTerapeuta = async (reserva: Reserva) => {
+  // --- FUNCIÓN notifyTerapeuta ELIMINADA ---
+  // Ya que la notificación se maneja en el backend.
+
+  const handleConfirmarCompra = async () => {
+    setIsProcessing(true); // Activa el estado de procesamiento
     try {
-      const response = await fetch("http://localhost:3000/api/enviar-reserva", {
+      const ngrokBaseUrl = "https://6c0a-186-173-16-84.ngrok-free.app"; // Tu URL de ngrok
+      const returnUrlForTransbank = `${ngrokBaseUrl}/api/webpay/confirmacion`;
+
+      const response = await fetch("http://localhost:3000/api/webpay", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(reserva),
+        body: JSON.stringify({
+          monto: total,
+          returnUrl: returnUrlForTransbank,
+          reservas: cart,
+        }),
       });
 
-      if (response.ok) {
-        console.log("Notificación enviada al terapeuta.");
-      } else {
-        console.error("Error al enviar la notificación.");
-      }
-    } catch (error) {
-      console.error("Error al hacer la solicitud:", error);
-    }
-  };
-
-  const handleConfirmarCompra = async () => {
-    try {
-      const response = await fetch(
-        "http://localhost:3000/api/crear-transaccion",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            amount: 10000, // Monto de prueba o real
-            buyOrder: `orden_${Date.now()}`, // Genera orden única
-            sessionId: `session_${Date.now()}`, // ID único de sesión
-            returnUrl: "http://localhost:5173/pago-exitoso", // Ruta a donde volver después del pago
-          }),
-        }
-      );
-
       if (!response.ok) {
-        throw new Error("Error creando la transacción");
+        const errorData = await response.json();
+        throw new Error(errorData.mensaje || "Error creando la transacción");
       }
 
       const data = await response.json();
@@ -86,9 +70,15 @@ const CartIcon = () => {
       form.submit();
     } catch (error) {
       console.error("Error al proceder al pago:", error);
-      alert("No se pudo iniciar el pago.");
+      alert(
+        "No se pudo iniciar el pago: " +
+          (error instanceof Error ? error.message : "Error desconocido")
+      );
+    } finally {
+      setIsProcessing(false); // Desactiva el estado de procesamiento al finalizar
     }
   };
+
   const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
@@ -97,6 +87,7 @@ const CartIcon = () => {
       return () => clearTimeout(timeout);
     }
   }, [showToast]);
+
   return (
     <div>
       <div
